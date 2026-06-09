@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1a18">
+<title>Admin — Schattenjacht</title>
+<style>
+:root{--ink:#1a1a18;--ink2:#222220;--ink3:#2a2a26;--paper:#f5f2eb;--gold:#c9922a;--gold-l:#f0d9a8;--moss:#3d5c3a;--moss-l:#d4e5d2;--brick:#b84c2b;--brick-l:#f5ddd5;--mist:#8a8880;--line:#333;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:sans-serif;background:var(--ink);color:var(--paper)}
+/* LOGIN */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;padding:2rem}
+#login h1{font-size:1.6rem;color:var(--gold);font-family:Georgia,serif}
+#login p{color:var(--mist);font-size:.9rem}
+.pw-inp{background:var(--ink2);border:1.5px solid #444;border-radius:var(--r);color:var(--paper);font-size:1rem;padding:.75rem 1rem;outline:none;width:100%;max-width:280px;transition:border-color .2s}
+.pw-inp:focus{border-color:var(--gold)}
+.btn-in{background:var(--gold);color:var(--ink);border:none;border-radius:var(--r);padding:.8rem 2rem;font-size:.95rem;font-weight:bold;cursor:pointer;width:100%;max-width:280px}
+.err{color:var(--brick);font-size:.85rem;display:none}
+/* DASH */
+#dash{display:none}
+.dhdr{background:var(--ink2);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.dhdr h1{font-size:1.1rem;color:var(--gold);font-family:Georgia,serif}
+.dhdr-r{display:flex;align-items:center;gap:.75rem}
+.ref-btn{background:var(--ink3);border:none;color:var(--mist);border-radius:6px;padding:.35rem .8rem;font-size:.78rem;cursor:pointer}
+.ref-btn:hover{color:var(--paper)}
+.ts{font-size:.7rem;color:var(--mist)}
+.dbody{padding:1.25rem;max-width:960px;margin:0 auto}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.scard{background:var(--ink2);border-radius:var(--r);padding:1rem;border:1px solid var(--line);text-align:center}
+.snum{font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.slbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--mist);margin-top:.25rem}
+/* SECTION */
+.sec-t{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mist);margin-bottom:.75rem;border-bottom:1px solid var(--line);padding-bottom:.5rem;margin-top:1.5rem}
+/* TEAM ROWS */
+.team-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.5rem}
+.trow{background:var(--ink2);border-radius:var(--r);padding:.85rem 1rem;border:1px solid var(--line);display:grid;grid-template-columns:1fr auto auto auto;gap:.75rem;align-items:center}
+.trow.active{border-color:var(--gold)}
+.trow.done{border-color:var(--moss)}
+.tname{font-weight:600;font-size:.95rem}
+.tstop{font-size:.75rem;color:var(--mist);margin-top:.2rem}
+.sbadge{background:var(--ink3);border:1px solid var(--gold);border-radius:99px;padding:.2rem .7rem;font-size:.78rem;color:var(--gold);font-weight:700}
+.stbadge{border-radius:99px;padding:.2rem .7rem;font-size:.73rem;font-weight:600}
+.stbadge.done{background:var(--moss-l);color:var(--moss)}
+.stbadge.active{background:#332800;color:var(--gold)}
+.tts{font-size:.68rem;color:var(--mist)}
+/* LEADERBOARD */
+.lb-list{display:flex;flex-direction:column;gap:.4rem}
+.lbrow{display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-radius:var(--r);background:var(--ink2)}
+.lbpos{width:28px;height:28px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+.lbpos.g{background:var(--gold);color:var(--ink)}
+.lbpos.s{background:#aaa;color:var(--ink)}
+.lbpos.b{background:#b87333;color:var(--ink)}
+.lbn{flex:1;font-size:.9rem}
+.lbp{font-weight:700;color:var(--gold);font-size:.9rem}
+/* ROUTE GRID */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem}
+.rstop{background:var(--ink2);border:1px solid var(--line);border-radius:var(--r);padding:.7rem .85rem;font-size:.8rem}
+.rstop .rn{font-size:.63rem;color:var(--mist);margin-bottom:.15rem}
+.rstop .re{font-size:1.2rem}
+.rstop .rm{font-weight:600;font-size:.8rem}
+.rhere{font-size:.68rem;color:var(--gold);margin-top:.2rem}
+/* EMPTY */
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--mist);font-size:.88rem}
+/* NO FB */
+.no-fb{background:var(--ink3);border:1px solid var(--gold);border-radius:var(--r);padding:1rem 1.25rem;font-size:.85rem;line-height:1.6;color:var(--paper);margin-bottom:1rem}
+.no-fb a{color:var(--gold)}
+.no-fb code{background:#111;border-radius:4px;padding:.15rem .4rem;font-size:.82rem;color:var(--gold-l)}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>🗺️ Admin</h1>
+  <p>Schattenjacht — Live overzicht</p>
+  <input class="pw-inp" id="pw" type="password" placeholder="Wachtwoord" autocomplete="off">
+  <button class="btn-in" onclick="tryLogin()">Inloggen</button>
+  <div class="err" id="err">Verkeerd wachtwoord</div>
+</div>
+
+<div id="dash">
+  <div class="dhdr">
+    <h1>🗺️ Schattenjacht — Admin</h1>
+    <div class="dhdr-r">
+      <span class="ts" id="ts"></span>
+      <button class="ref-btn" onclick="load()">↻ Vernieuwen</button>
+    </div>
+  </div>
+  <div class="dbody">
+    <div id="no-fb-msg" class="no-fb" style="display:none">
+      ⚠️ <strong>Firebase nog niet geconfigureerd.</strong><br>
+      Pas <code>CONFIG.firebase</code> in <code>data.js</code> aan voor live tracking.
+      Stappen: <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a> → Nieuw project → Realtime Database → Testmodus → Config kopiëren naar data.js.
+      Het <strong>gratis Spark plan</strong> is meer dan genoeg en kan <strong>nooit automatisch betaald</strong> worden.
+    </div>
+    <div class="stats">
+      <div class="scard"><div class="snum" id="st-t">0</div><div class="slbl">Teams actief</div></div>
+      <div class="scard"><div class="snum" id="st-f">0</div><div class="slbl">Gefinished</div></div>
+      <div class="scard"><div class="snum" id="st-s">0</div><div class="slbl">Topscore</div></div>
+    </div>
+    <div class="sec-t">Teams — live status</div>
+    <div class="team-list" id="tlist"><div class="empty">Geen teams nog</div></div>
+    <div class="sec-t">Scorebord</div>
+    <div class="lb-list" id="lb"><div class="empty">Geen scores</div></div>
+    <div class="sec-t">Route — wie is waar?</div>
+    <div class="rgrid" id="rg"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+let teams={};let fbOk=false;let timer;
+
+document.getElementById('pw').onkeydown=e=>{if(e.key==='Enter')tryLogin()};
+
+function tryLogin(){
+  if(document.getElementById('pw').value===CONFIG.adminPassword){
+    document.getElementById('login').style.display='none';
+    document.getElementById('dash').style.display='block';
+    checkFB();
+    load();
+    timer=setInterval(load,8000);
+  } else {
+    document.getElementById('err').style.display='block';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+  }
+}
+
+function checkFB(){
+  const ok=CONFIG.firebase.apiKey&&CONFIG.firebase.apiKey!=='JOUW_API_KEY';
+  document.getElementById('no-fb-msg').style.display=ok?'none':'block';
+  if(!ok)return;
+  const s=document.createElement('script');s.type='module';
+  s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,onValue}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);onValue(ref(db,'teams'),(snap)=>{window._fbData=snap.val();window._fbReady=true;});`;
+  document.head.appendChild(s);
+  fbOk=true;
+}
+
+function load(){
+  if(fbOk&&window._fbData){
+    teams=window._fbData||{};
+  }
+  render();
+  document.getElementById('ts').textContent='Bijgewerkt: '+new Date().toLocaleTimeString('nl-BE');
+}
+
+function render(){
+  const arr=Object.values(teams);
+  const fin=arr.filter(t=>t.finished);
+  const top=arr.reduce((m,t)=>Math.max(m,t.score||0),0);
+  document.getElementById('st-t').textContent=arr.length;
+  document.getElementById('st-f').textContent=fin.length;
+  document.getElementById('st-s').textContent=top;
+
+  // team list
+  const tl=document.getElementById('tlist');
+  if(!arr.length){tl.innerHTML='<div class="empty">Wacht op teams…</div>'}
+  else{
+    const sorted=[...arr].sort((a,b)=>(b.score||0)-(a.score||0));
+    tl.innerHTML=sorted.map(t=>{
+      const ago=t.ts?Math.round((Date.now()-t.ts)/1000):null;
+      const agoT=ago!=null?(ago<60?ago+'s':Math.round(ago/60)+'min'):'-';
+      const cls=t.finished?'done':'active';
+      return`<div class="trow ${cls}">
+        <div><div class="tname">${esc(t.team)}</div><div class="tstop">📍 ${esc(t.stopName||'—')}</div></div>
+        <div class="tts">${agoT} geleden</div>
+        <div class="sbadge">⭐ ${t.score||0}</div>
+        <div class="stbadge ${cls}">${t.finished?'✓ Finish':'▶ Actief'}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // leaderboard
+  const lb=document.getElementById('lb');
+  if(!arr.length){lb.innerHTML='<div class="empty">Nog geen scores</div>'}
+  else{
+    const s=[...arr].sort((a,b)=>(b.score||0)-(a.score||0));
+    lb.innerHTML=s.map((t,i)=>`<div class="lbrow">
+      <div class="lbpos${i===0?' g':i===1?' s':i===2?' b':''}">${i+1}</div>
+      <div class="lbn">${esc(t.team)}${t.finished?' <span style="color:var(--moss);font-size:.72rem">✓</span>':''}</div>
+      <div class="lbp">${t.score||0} pt</div>
+    </div>`).join('');
+  }
+
+  // route
+  document.getElementById('rg').innerHTML=STOPS.map(st=>{
+    const here=arr.filter(t=>t.stopName===st.name&&!t.finished);
+    return`<div class="rstop"><div class="rn">Stop ${st.id}</div><div class="re">${st.emoji}</div><div class="rm">${st.name}</div>${here.length?`<div class="rhere">👥 ${here.map(t=>esc(t.team)).join(', ')}</div>`:''}</div>`;
+  }).join('');
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+</script>
+</body>
+</html>
