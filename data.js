@@ -11,7 +11,7 @@ const CONFIG = {
   date:     "Woensdag 24 juni 2026",
 
   // ── Admin ─────────────────────────────────────────────────
-  adminPassword: "artevelde2025",   // ← verander dit vóór de dag zelf!
+  adminPassword: "1234",   // ← verander dit vóór de dag zelf!
 
   // ── Firebase (gratis Spark plan — vul in na aanmaken) ─────
   // Ga naar https://console.firebase.google.com
