@@ -197,6 +197,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 }
 .fin-trophy{font-size:4rem}
 #s-finish h2{font-size:2.4rem;font-weight:700;color:var(--gold);letter-spacing:-.03em}
+.fin-pos{font-size:1.3rem;font-weight:700;color:var(--paper);margin-bottom:.25rem;letter-spacing:-.01em}
 .fin-pts{font-size:5rem;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-.04em}
 .fin-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mist);font-weight:600}
 #s-finish p{color:var(--mist);line-height:1.65;max-width:280px;font-size:.9rem;padding:0 1.5rem}
@@ -267,6 +268,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   <div class="fin-hero">
     <div class="fin-trophy">🏆</div>
     <h2>Finish!</h2>
+    <div class="fin-pos" id="fpos">🎉 Proficiat!</div>
     <div class="fin-pts" id="fpts">0</div>
     <div class="fin-lbl">punten gescoord</div>
   </div>
@@ -336,7 +338,7 @@ function exitTest(){S.test=false;document.getElementById('test-bar').classList.r
 function initFB(){
   if(!CONFIG.firebase.apiKey||CONFIG.firebase.apiKey==='JOUW_API_KEY')return;
   const s=document.createElement('script');s.type='module';
-  s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,set}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);window._fb=(p,v)=>set(ref(db,p),v);`;
+  s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,set,onValue}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);window._fb=(p,v)=>set(ref(db,p),v);onValue(ref(db,'teams'),(snap)=>{window._fbData=snap.val();});`;
   document.head.appendChild(s);
 }
 let _lastPush=0;
@@ -517,10 +519,33 @@ function simStep(){
 }
 
 // FINISH
-function doFinish(){
-  clearSession();push(true);
-  document.getElementById('fpts').textContent=S.score;
-  document.getElementById('fmsg').textContent=`${S.team} — ${S.score} punten. Welkom aan de Multatuli! 🥂`;
+async function doFinish(){
+  clearSession();
+  // tel hoeveel teams al gefinished zijn via Firebase
+  let pos = 1;
+  try {
+    if(window._fb && window._fbData) {
+      const all = Object.values(window._fbData || {});
+      pos = all.filter(t => t.finished && t.team !== S.team).length + 1;
+    }
+  } catch(e) {}
+  // push als finished
+  S.idx = STOPS.length;
+  push(true);
+  // toon finish scherm
+  document.getElementById('fpts').textContent = S.score;
+  // podium boodschap
+  const medals = ['🥇','🥈','🥉'];
+  const medal = medals[pos-1] || '🎉';
+  const posMsg = pos === 1
+    ? `${medal} Jullie zijn de eersten! Proficiat!`
+    : pos === 2
+    ? `${medal} Tweede plaats! Goed gedaan!`
+    : pos === 3
+    ? `${medal} Derde plaats! jah oke, niet slecht! 😉`
+    : `${medal} Plaats ${pos} — goed gepresteerd!`;
+  document.getElementById('fpos').textContent = posMsg;
+  document.getElementById('fmsg').textContent = `${S.team} · ${S.score} punten · Welkom aan de Multatuli! 🥂`;
   showScreen('finish');
 }
 
