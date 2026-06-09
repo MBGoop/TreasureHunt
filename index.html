@@ -272,10 +272,24 @@ function mkCompass(st){
   let cls='',tc='',tt='❄️ Nog ver weg';
   if(d<CONFIG.compassActiveFrom*0.6){cls='warm';tc='warm';tt='🟡 Je komt er dichtbij…'}
   if(d<CONFIG.unlockRadius){cls='hot';tc='hot';tt='🔥 Je bent er!'}
-  // naam verborgen zolang stop niet open is
   const nameHidden = !isOpen(st);
   const destLabel = nameHidden ? '🔒 Onbekend — volg de clue' : `${st.emoji} ${st.name}`;
-  w.innerHTML=`<div class="compass-card ${cls}"><div class="c-dial"><span class="c-arrow" style="transform:rotate(${rot}deg)">↑</span></div><div class="c-info"><div class="c-dest">Volgende stop: <strong>${destLabel}</strong></div><div class="c-dist">${dm}</div><div class="c-temp ${tc}">${tt}</div></div></div>`;
+  // Toon 8-richtingen kompas op basis van bearing (werkt altijd, ook zonder gyroscoop)
+  const dirs = ['↑','↗','→','↘','↓','↙','←','↖'];
+  const dirLabels = ['N','NO','O','ZO','Z','ZW','W','NW'];
+  const dirIdx = Math.round(bear / 45) % 8;
+  const dirArrow = dirs[dirIdx];
+  const dirLabel = dirLabels[dirIdx];
+  w.innerHTML=`<div class="compass-card ${cls}">
+    <div class="c-dial" style="flex-direction:column;gap:2px">
+      <span style="font-size:1.8rem;line-height:1">${dirArrow}</span>
+      <span style="font-size:.65rem;font-family:sans-serif;color:var(--mist)">${dirLabel}</span>
+    </div>
+    <div class="c-info">
+      <div class="c-dest">Volgende stop: <strong>${destLabel}</strong></div>
+      <div class="c-dist">${dm}</div>
+      <div class="c-temp ${tc}">${tt}</div>
+    </div></div>`;
   return w;
 }
 
