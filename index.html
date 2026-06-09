@@ -304,6 +304,13 @@ document.getElementById('h1').innerHTML='Schattenjacht<br><em>'+CONFIG.title.spl
 })();
 document.getElementById('imeta').textContent=CONFIG.subtitle+' · '+CONFIG.date;
 document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
+if(window.location.search.includes('test')){
+  const tb=document.createElement('div');
+  tb.className='test-block';
+  tb.innerHTML='<div class="tb-t">🧪 Testmodus</div><div class="tb-s">Simuleer GPS-stops zonder fysiek aanwezig te zijn</div>';
+  tb.onclick=()=>go(true);
+  document.querySelector('.intro-form').appendChild(tb);
+}
 
 function resumeSession(){
   try{
