@@ -6,7 +6,7 @@
 
 const CONFIG = {
   // ── Algemeen ──────────────────────────────────────────────
-  title:    "Overleef de Teamnamiddag!",  // titel op startscherm
+  title:    "Overleef<br><em>de Teamnamiddag!</em>",  // titel op startscherm
   subtitle: "Avontuur, Ambiance & (een beetje) Chaos",  // subtitel op startscherm
   date:     "Woensdag 24 juni 2026",
 
