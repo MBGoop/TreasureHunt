@@ -11,25 +11,25 @@ const CONFIG = {
   date:     "Woensdag 24 juni 2025",
 
   // ── Admin ─────────────────────────────────────────────────
-  adminPassword: "artevelde2025",   // ← verander dit vóór de dag zelf!
+  adminPassword: "AR1234",   // ← verander dit vóór de dag zelf!
 
   // ── Firebase (gratis Spark plan — vul in na aanmaken) ─────
   // Ga naar https://console.firebase.google.com
   // Maak een project → Realtime Database → Start in testmodus
   // Kopieer de config hieronder. GRATIS PLAN = nooit automatisch betaald.
-  firebase: {
-    apiKey:            "JOUW_API_KEY",
-    authDomain:        "JOUW_PROJECT.firebaseapp.com",
-    databaseURL:       "https://JOUW_PROJECT-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId:         "JOUW_PROJECT",
-    storageBucket:     "JOUW_PROJECT.appspot.com",
-    messagingSenderId: "JOUW_SENDER_ID",
-    appId:             "JOUW_APP_ID"
+firebase: {
+  apiKey: "AIzaSyCVTgtbB_D1uzA5a6DJmsZM99GjtuY1OH0",
+  authDomain: "treasure-hunt-artevelde.firebaseapp.com",
+  databaseURL: "https://treasure-hunt-artevelde-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "treasure-hunt-artevelde",
+  storageBucket: "treasure-hunt-artevelde.firebasestorage.app",
+  messagingSenderId: "468273847640",
+  appId: "1:468273847640:web:ebcb5046a90e9de0a8192d"
   },
 
   // ── GPS ───────────────────────────────────────────────────
-  unlockRadius:        60,    // meter — hoe dicht voor stop opengaat
-  compassActiveFrom:   500,   // meter — vanaf wanneer kompas actief wordt
+  unlockRadius:        10,    // meter — hoe dicht voor stop opengaat
+  compassActiveFrom:   50,   // meter — vanaf wanneer kompas actief wordt
 
   // ── Punten ────────────────────────────────────────────────
   pointsStop:   2,   // punten voor een stop bereiken
