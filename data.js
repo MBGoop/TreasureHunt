@@ -6,8 +6,8 @@
 
 const CONFIG = {
   // ── Algemeen ──────────────────────────────────────────────
-  title:    "Fun wandeling",
-  subtitle: "Academiejaarafsluiter · Arteveldehogeschool",
+  title:    "Overleef de Teamnamiddag!",  // titel op startscherm
+  subtitle: "Avontuur, Ambiance & (een beetje) Chaos",  // subtitel op startscherm
   date:     "Woensdag 24 juni 2026",
 
   // ── Admin ─────────────────────────────────────────────────
@@ -25,7 +25,7 @@ const CONFIG = {
   },
 
   // ── GPS ───────────────────────────────────────────────────
-  unlockRadius:      10,   // meter — hoe dicht voor stop opengaat
+  unlockRadius:      20,   // meter — hoe dicht voor stop opengaat
   compassActiveFrom: 500,  // meter — vanaf wanneer kompas actief wordt
 
   // ── Punten ────────────────────────────────────────────────
@@ -45,7 +45,7 @@ const STOPS = [
     clue: "Je staat aan de mooiste kaai van Gent. Kijk naar de overkant van het water. Twee dieren staan op een gevel, maar ze kijken niet naar elkaar. Welk dier? Dat dier staat ook op een brugleuning vlakbij — loop naar die brug.",
     quiz: {
       vraag: "Waarom staan de zwanen op 'De Zwane' met de RUG naar elkaar?",
-      opties: ["Twee rivaliserende schippersfamilies", "Teken van onenigheid tussen schippers die er handelden", "De architect vond het mooier", "Ze kijken naar de ingang"],
+      opties: ["Twee rivaliserende schippersfamilies", "De ene symboliseert vrouwen, de ander alcohol", "De architect vond het mooier in perfecte symmetrie.", "De stenhouwer maakte een fout "],
       correct: 1
     }
   },
@@ -64,7 +64,7 @@ const STOPS = [
     id: 3, emoji: "🥩", name: "Groot Vleeshuis",
     lat: 51.05593, lng: 3.72181,
     weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Ze werden 'Prinsenkinderen' genoemd. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
-    clue: "Je staat voor het gebouw waar alleen 'Prinsenkinderen' vlees mochten verkopen. Scheepjes voeren vroeger ONDER dit gebouw door. Kijk aan de zijkant — tel het aantal bogen. Dat getal = het aantal letters van je volgende stop: een kasteel dat ook als katoenfabriek heeft gediend.",
+    clue: "Je staat voor het gebouw waar alleen 'Prinsenkinderen' vlees mochten verkopen. Scheepjes voeren vroeger ONDER dit gebouw door. Kijk aan de zijkant — tel het aantal bogen. Dat getal = het aantal letters van je volgende stop: een bouwwerk dat ook als katoenfabriek heeft gediend.",
     quiz: {
       vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
       opties: ["De Gildebroeders", "De Prinsenkinderen", "De Koningszonen", "De Ambachtsmeesters"],
@@ -75,7 +75,7 @@ const STOPS = [
     id: 4, emoji: "🏰", name: "Gravensteen",
     lat: 51.05718, lng: 3.72072,
     weetje: "Het Gravensteen was burcht, gevangenis, folterplaats én katoenfabriek. Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
-    clue: "Dit kasteel was ooit een katoenfabriek. Op het plein voor het kasteel knipperen de lantaarnpalen bij elke geboorte in Gent. Tel het aantal lantaarnpalen. Dat getal min één = huisnummer van je volgende stop op de Kraanlei.",
+    clue: "Dit bouwwerk was ooit een katoenfabriek. Op het plein voor het kasteel knipperen de lantaarnpalen bij elke geboorte in Gent. Tel het aantal lantaarnpalen. Dat getal min één = huisnummer van je volgende stop op de Kraanlei.",
     quiz: {
       vraag: "Wat gebeurt er op het Sint-Veerleplein bij elke geboorte in Gent?",
       opties: ["Er klinkt een klokgelui", "De lantaarnpalen knipperen", "Een vlag wordt gehesen", "Een fonteintje springt aan"],
@@ -112,7 +112,7 @@ const STOPS = [
     quiz: {
       vraag: "Wat geef je als onderpand voor een Kwak-bier bij café Dulle Griet?",
       opties: ["Je portemonnee", "Je identiteitskaart", "Je schoen", "Je sleutels"],
-      correct: 2
+      correct: 3
     }
   },
   {
@@ -147,7 +147,7 @@ const STOPS = [
     quiz: {
       vraag: "Wat betekent 'Multatuli' in het Latijn?",
       opties: ["Ik heb veel gereisd", "Ik heb veel gedragen", "Ik heb veel geleerd", "Ik heb veel gezien"],
-      correct: 1
+      correct: 2
     }
   }
 ];
