@@ -223,11 +223,24 @@ function initFB(){
   s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,set}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);window._fb=(p,v)=>set(ref(db,p),v);`;
   document.head.appendChild(s);
 }
-function push(){
+let _lastPush=0;
+function push(force=false){
   if(!window._fb)return;
+  const now=Date.now();
+  if(!force&&now-_lastPush<5000)return;
+  _lastPush=now;
   const st=STOPS[S.idx];
   const k='teams/'+S.team.replace(/[^a-zA-Z0-9]/g,'_');
-  try{window._fb(k,{team:S.team,score:S.score,stopIdx:S.idx,stopName:st?.name||'—',lat:S.pos?.lat||null,lng:S.pos?.lng||null,finished:S.idx>=STOPS.length,ts:Date.now()})}catch(e){}
+  let distNext=null;
+  if(S.pos&&st){distNext=Math.round(dist(S.pos.lat,S.pos.lng,st.lat,st.lng))}
+  try{window._fb(k,{
+    team:S.team,score:S.score,
+    stopIdx:S.idx,stopName:st?.name||'—',stopEmoji:st?.emoji||'',
+    lat:S.pos?.lat||null,lng:S.pos?.lng||null,
+    distNext,
+    finished:S.idx>=STOPS.length,
+    ts:now
+  })}catch(e){}
 }
 
 // RENDER
@@ -259,13 +272,16 @@ function mkCompass(st){
   let cls='',tc='',tt='❄️ Nog ver weg';
   if(d<CONFIG.compassActiveFrom*0.6){cls='warm';tc='warm';tt='🟡 Je komt er dichtbij…'}
   if(d<CONFIG.unlockRadius){cls='hot';tc='hot';tt='🔥 Je bent er!'}
-  w.innerHTML=`<div class="compass-card ${cls}"><div class="c-dial"><span class="c-arrow" style="transform:rotate(${rot}deg)">↑</span></div><div class="c-info"><div class="c-dest">Volgende stop: <strong>${st.emoji} ${st.name}</strong></div><div class="c-dist">${dm}</div><div class="c-temp ${tc}">${tt}</div></div></div>`;
+  // naam verborgen zolang stop niet open is
+  const nameHidden = !isOpen(st);
+  const destLabel = nameHidden ? '🔒 Onbekend — volg de clue' : `${st.emoji} ${st.name}`;
+  w.innerHTML=`<div class="compass-card ${cls}"><div class="c-dial"><span class="c-arrow" style="transform:rotate(${rot}deg)">↑</span></div><div class="c-info"><div class="c-dest">Volgende stop: <strong>${destLabel}</strong></div><div class="c-dist">${dm}</div><div class="c-temp ${tc}">${tt}</div></div></div>`;
   return w;
 }
 
 function mkLocked(st){
   const d=document.createElement('div');d.className='locked-card';
-  d.innerHTML=`<div class="li">🔒</div><h3>${st.emoji} ${st.name}</h3><p>Kom dichterbij om deze stop te ontgrendelen.<br>Volg de pijl hierboven.</p>`;
+  d.innerHTML=`<div class="li">🔒</div><h3>Onbekende stop</h3><p>Volg de clue en het kompas.<br>De stop onthult zich als je dichtbij genoeg bent.</p>`;
   return d;
 }
 
@@ -316,7 +332,7 @@ function ans(id,ch){
   fb.textContent=ok?`🎉 Correct! +${CONFIG.pointsQuiz} punten`:'✗ Jammer — geen punten';
   fb.className='qfb '+(ok?'ok':'nok');
   if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`)}
-  S.quizDone.add(id);addScore(CONFIG.pointsStop);push();
+  S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);
   setTimeout(()=>{
     S.idx=Math.min(S.idx+1,STOPS.length-1);
     if(S.pos)S.pos.sim=false;
@@ -358,7 +374,7 @@ function simStep(){
 
 // FINISH
 function doFinish(){
-  push();
+  push(true);
   document.getElementById('fpts').textContent=S.score;
   document.getElementById('fmsg').textContent=`${S.team} — ${S.score} punten. Welkom aan de Multatuli! 🥂`;
   showScreen('finish');

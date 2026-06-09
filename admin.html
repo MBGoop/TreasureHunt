@@ -63,6 +63,9 @@ html,body{min-height:100%;font-family:sans-serif;background:var(--ink);color:var
 .rhere{font-size:.68rem;color:var(--gold);margin-top:.2rem}
 /* EMPTY */
 .empty{text-align:center;padding:2.5rem 1rem;color:var(--mist);font-size:.88rem}
+.dist-tag{background:#1a2a1a;color:#6abf5e;border-radius:99px;padding:.1rem .5rem;font-size:.68rem;margin-left:.4rem;font-family:sans-serif}
+.map-link{color:var(--gold);font-size:.72rem;margin-left:.5rem;text-decoration:none;font-family:sans-serif}
+.map-link:hover{text-decoration:underline}
 /* NO FB */
 .no-fb{background:var(--ink3);border:1px solid var(--gold);border-radius:var(--r);padding:1rem 1.25rem;font-size:.85rem;line-height:1.6;color:var(--paper);margin-bottom:1rem}
 .no-fb a{color:var(--gold)}
@@ -161,11 +164,17 @@ function render(){
     const sorted=[...arr].sort((a,b)=>(b.score||0)-(a.score||0));
     tl.innerHTML=sorted.map(t=>{
       const ago=t.ts?Math.round((Date.now()-t.ts)/1000):null;
-      const agoT=ago!=null?(ago<60?ago+'s':Math.round(ago/60)+'min'):'-';
+      const agoT=ago!=null?(ago<60?ago+'s geleden':Math.round(ago/60)+'min geleden'):'-';
       const cls=t.finished?'done':'active';
+      const hasPos=t.lat&&t.lng;
+      const mapsUrl=hasPos?`https://www.google.com/maps?q=${t.lat},${t.lng}`:'#';
+      const distTxt=t.distNext!=null?(t.distNext<1000?t.distNext+'m van stop':(t.distNext/1000).toFixed(1)+'km van stop'):'';
       return`<div class="trow ${cls}">
-        <div><div class="tname">${esc(t.team)}</div><div class="tstop">📍 ${esc(t.stopName||'—')}</div></div>
-        <div class="tts">${agoT} geleden</div>
+        <div>
+          <div class="tname">${esc(t.team)}</div>
+          <div class="tstop">${t.stopEmoji||'📍'} ${esc(t.stopName||'—')}${distTxt?' · <span class=\'dist-tag\'>'+distTxt+'</span>':''}${hasPos?' <a class=\'map-link\' href=\''+mapsUrl+'\' target=\'_blank\'>🗺️</a>':''}</div>
+        </div>
+        <div class="tts">${agoT}</div>
         <div class="sbadge">⭐ ${t.score||0}</div>
         <div class="stbadge ${cls}">${t.finished?'✓ Finish':'▶ Actief'}</div>
       </div>`;
