@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1a18">
-<title>Mission (Im)Possible IP-Team</title>
+<title>Schattenjacht Gent</title>
 <style>
 :root{
   --ink:#151412;--ink2:#1e1c19;--ink3:#272420;
@@ -24,7 +24,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 /* INTRO */
 #s-intro{
-  background:var(--ink);align-items:center;justify-content:flex-start;
+  background:var(--ink);align-items:center;justify-content:center;
   text-align:center;padding:0;gap:0;overflow-y:auto;
   position:relative;
 }
@@ -34,7 +34,6 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   display:flex;flex-direction:column;align-items:center;gap:.75rem;
   border-bottom-left-radius:32px;border-bottom-right-radius:32px;
   margin-bottom:1.75rem;
-  border-bottom:none;
 }
 .intro-logo{
   width:64px;height:64px;border-radius:20px;
@@ -61,7 +60,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   transition:opacity .15s,transform .1s;
 }
 .btn-start:active{opacity:.88;transform:scale(.98)}
-
+.test-block{
+  width:100%;background:var(--ink2);border:1.5px dashed #4a4640;
+  border-radius:var(--r);padding:.9rem 1.1rem;text-align:center;cursor:pointer;
+  transition:border-color .2s;
+}
+.test-block:hover{border-color:var(--gold)}
+.test-block .tb-t{font-size:.85rem;color:var(--paper);margin-bottom:.2rem;font-weight:600}
+.test-block .tb-s{font-size:.73rem;color:var(--mist)}
 
 /* HUNT HEADER */
 #s-hunt{background:var(--paper);color:var(--ink)}
@@ -77,12 +83,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   border-radius:99px;padding:.32rem 1rem;
   font-size:.82rem;font-weight:700;letter-spacing:.02em;
 }
-.test-bar{background:#1f1800;border-bottom:1px solid #4a3800;padding:.5rem 1.1rem;display:none;align-items:center;gap:.6rem}
-.test-bar.on{display:flex}
-.test-bar-lbl{font-size:.72rem;color:var(--gold);font-weight:700;flex:1}
-.btn-sim{background:var(--gold);color:#1a1200;border:none;border-radius:var(--rs);padding:.45rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
-.btn-sim:active{opacity:.8}
-.btn-exit{background:transparent;border:1px solid #4a4640;color:var(--mist);border-radius:var(--rs);padding:.4rem .7rem;font-size:.7rem;cursor:pointer}
+
 .prog-rail{height:3px;background:#2a2620}
 .prog-fill{height:100%;background:var(--gold);transition:width .5s ease;border-radius:0 99px 99px 0}
 .hunt-scroll{flex:1;overflow-y:auto;padding-bottom:1.5rem}
@@ -142,18 +143,21 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 }
 .cava .stop-badge{background:var(--pink-l);color:#6a2060}
 .fin .stop-badge{background:var(--moss-l);color:#1a5028}
-.tab-bar{display:flex;background:var(--paper2);border-bottom:1.5px solid var(--line)}
-.tab-btn{
-  flex:1;padding:.7rem .3rem;border:none;background:none;
-  font-size:.72rem;color:var(--mist);cursor:pointer;font-weight:600;
-  border-bottom:2.5px solid transparent;margin-bottom:-1.5px;
-  transition:color .15s,border-color .15s;letter-spacing:.02em;
+.stop-flow{display:flex;flex-direction:column;gap:0}
+.flow-section{padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
+.flow-section:last-child{border-bottom:none}
+.clue-section{background:#fdfcf8}
+.flow-divider{
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;
+  font-weight:700;color:var(--mist);margin-bottom:.65rem;
 }
-.tab-btn.on{color:var(--gold);border-bottom-color:var(--gold)}
-.cava .tab-btn.on{color:var(--pink);border-bottom-color:var(--pink)}
-.fin .tab-btn.on{color:var(--moss);border-bottom-color:var(--moss)}
-.tab-pane{display:none;padding:1rem 1.1rem}
-.tab-pane.on{display:block}
+.btn-next{
+  width:100%;margin-top:1rem;background:var(--gold);color:#1a1200;
+  border:none;border-radius:var(--r);padding:.9rem;
+  font-size:.95rem;font-family:inherit;font-weight:700;cursor:pointer;
+  transition:opacity .15s;
+}
+.btn-next:active{opacity:.85}
 .ibox{border-left:3px solid;border-radius:0 var(--rs) var(--rs) 0;padding:.9rem 1rem;font-size:.9rem;line-height:1.75}
 .ibox .blbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.4rem}
 .weetje{background:var(--moss-l);border-color:var(--moss);color:#1a3820}
@@ -230,7 +234,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <input class="field-inp" id="inp" type="text" placeholder="bv. Team Gravensteen" maxlength="24" autocomplete="off">
     </div>
     <button class="btn-start" onclick="go(false)">Start de jacht &rarr;</button>
-
+    <div class="test-block" onclick="go(true)">
+      <div class="tb-t">🧪 Testmodus</div>
+      <div class="tb-s">Simuleer GPS-stops zonder fysiek aanwezig te zijn</div>
+    </div>
   </div>
 </div>
 
@@ -244,11 +251,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       </div>
       <div class="score-chip">⭐ <span id="ht-score">0</span></div>
     </div>
-    <div class="test-bar" id="test-bar">
-      <div class="test-bar-lbl">🧪 Testmodus actief</div>
-      <button class="btn-sim" onclick="simStep()">📍 Simuleer stop</button>
-      <button class="btn-exit" onclick="exitTest()">✕ Echt GPS</button>
-    </div>
+
     <div class="prog-rail"><div class="prog-fill" id="prog"></div></div>
   </div>
   <div class="hunt-scroll" id="hscroll"></div>
@@ -283,25 +286,17 @@ document.getElementById('h1').innerHTML='Schattenjacht<br><em>'+CONFIG.title.spl
     if(!d)return;
     const p=JSON.parse(d);
     if(!p.team)return;
-    const stop=STOPS[Math.min(p.idx||0, STOPS.length-1)];
-    const block=document.getElementById('resume-block');
-    if(block){
-      block.style.display='block';
-      document.getElementById('resume-team').textContent=p.team;
-      document.getElementById('resume-info').textContent=`Stop ${(p.idx||0)+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
-    }
+    const stop=STOPS[p.idx]||STOPS[0];
+    document.getElementById('resume-block').style.display='block';
+    document.getElementById('resume-team').textContent=p.team;
+    document.getElementById('resume-info').textContent=`Stop ${p.idx+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
+    document.getElementById('inp').placeholder='Of nieuw team...';
+    // change field label
+    document.querySelector('.field-lbl').textContent='Of start nieuw team';
   }catch(e){}
 })();
 document.getElementById('imeta').textContent=CONFIG.subtitle+' · '+CONFIG.date;
 document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
-// testmodus via URL: voeg ?test toe aan de URL (alleen voor organisator)
-if(window.location.search.includes('test')){
-  const tb=document.createElement('div');
-  tb.style.cssText='width:100%;max-width:300px;background:#1e1c19;border:1.5px dashed #4a4640;border-radius:16px;padding:.9rem 1.1rem;text-align:center;cursor:pointer;margin-top:.5rem';
-  tb.innerHTML='<div style="font-size:.85rem;color:#f7f4ee;font-weight:600">🧪 Testmodus</div><div style="font-size:.73rem;color:#9a9690">Simuleer GPS-stops</div>';
-  tb.onclick=()=>go(true);
-  document.querySelector('.intro-form').appendChild(tb);
-}
 
 function resumeSession(){
   try{
@@ -315,9 +310,18 @@ function resumeSession(){
     if(S.test)document.getElementById('test-bar').classList.add('on');
     showScreen('hunt');render();initFB();
     if(!S.test)startGPS();
-    saveSession();
-  toast(`👋 Welkom terug ${S.team}!`);
+    toast(`👋 Welkom terug ${S.team}!`);
   }catch(e){toast('Kon sessie niet herstellen')}
+}
+
+function nextStop(){
+  S.idx=Math.min(S.idx+1,STOPS.length-1);
+  if(S.pos)S.pos.sim=false;
+  saveSession();
+  render();
+  document.getElementById('hscroll').scrollTo(0,0);
+  const nx=STOPS[S.idx];
+  if(nx)toast(`➡️ ${nx.emoji} ${nx.name}`);
 }
 
 function go(testMode){
@@ -327,7 +331,6 @@ function go(testMode){
   S.team=n;S.test=testMode;
   document.getElementById('ht-team').textContent=n;
   if(testMode)document.getElementById('test-bar').classList.add('on');
-  saveSession();
   showScreen('hunt');render();initFB();
   if(!testMode)startGPS();
   else{document.getElementById('gtxt').textContent='Testmodus — geen echte GPS';document.getElementById('gdot').className='gdot srch'}
@@ -417,22 +420,38 @@ function mkLocked(st){
 }
 
 function mkCard(st){
-  const at=S.tab[st.id]||'weetje';const qd=S.quizDone.has(st.id);
+  const qd=S.quizDone.has(st.id);
   const card=document.createElement('div');
   card.className='stop-card'+(st.cava?' cava':'')+(st.finish?' fin':'');
   card.id='c'+st.id;
   let bdg=`Stop ${st.id}/${STOPS.length}`;
   if(st.cava)bdg='🥂 Verrassing!';
   if(st.finish)bdg='🏁 Finish';
-  card.innerHTML=`<div class="stop-head"><div class="stop-num">${st.id}</div><div class="stop-title">${st.emoji} ${st.name}</div><div class="stop-badge">${bdg}</div></div>
-<div class="tab-bar">
-<button class="tab-btn${at==='weetje'?' on':''}" onclick="setTab(${st.id},'weetje',this)">💡 Weetje</button>
-<button class="tab-btn${at==='clue'?' on':''}" onclick="setTab(${st.id},'clue',this)">🗺️ Clue</button>
-<button class="tab-btn${at==='quiz'?' on':''}" onclick="setTab(${st.id},'quiz',this)">❓ Quiz${qd?' ✓':''}</button>
-</div>
-<div id="tw${st.id}" class="tab-pane${at==='weetje'?' on':''}"><div class="ibox weetje"><div class="blbl">Historisch weetje</div>${st.weetje}</div></div>
-<div id="tc${st.id}" class="tab-pane${at==='clue'?' on':''}"><div class="ibox clue"><div class="blbl">🗺️ Volgende clue</div>${st.clue}</div>${st.finish?'<button class="btn-fin" onclick="doFinish()">🏁 Finish registreren</button>':''}</div>
-<div id="tq${st.id}" class="tab-pane${at==='quiz'?' on':''}">${mkQuiz(st)}</div>`;
+
+  // linear flow: weetje → quiz → clue (clue only after quiz answered)
+  card.innerHTML=`
+    <div class="stop-head">
+      <div class="stop-num">${st.id}</div>
+      <div class="stop-title">${st.emoji} ${st.name}</div>
+      <div class="stop-badge">${bdg}</div>
+    </div>
+    <div class="stop-flow">
+      <div class="flow-section">
+        <div class="ibox weetje"><div class="blbl">💡 Historisch weetje</div>${st.weetje}</div>
+      </div>
+      <div class="flow-section">
+        <div class="flow-divider">❓ Quizvraag</div>
+        ${mkQuiz(st)}
+      </div>
+      <div class="flow-section clue-section" id="clue-${st.id}" style="${qd?'':'display:none'}">
+        <div class="flow-divider">🗺️ Volgende clue</div>
+        <div class="ibox clue">${st.clue}</div>
+        ${st.finish
+          ?'<button class="btn-fin" onclick="doFinish()">🏁 Finish registreren</button>'
+          :'<button class="btn-next" onclick="nextStop()">Ga naar volgende stop &rarr;</button>'
+        }
+      </div>
+    </div>`;
   return card;
 }
 
@@ -463,14 +482,15 @@ function ans(id,ch){
   fb.textContent=ok?`🎉 Correct! +${CONFIG.pointsQuiz} punten`:'✗ Jammer — geen punten';
   fb.className='qfb '+(ok?'ok':'nok');
   if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`)}
-  S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);
+  S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);saveSession();
+  // reveal clue section
   setTimeout(()=>{
-    S.idx=Math.min(S.idx+1,STOPS.length-1);
-    if(S.pos)S.pos.sim=false;
-    saveSession();
-    render();document.getElementById('hscroll').scrollTo(0,0);
-    const nx=STOPS[S.idx];if(nx)toast(`➡️ ${nx.emoji} ${nx.name}`);
-  },2000);
+    const clueEl=document.getElementById('clue-'+id);
+    if(clueEl){
+      clueEl.style.display='block';
+      clueEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  },800);
 }
 
 function addScore(n){S.score+=n;document.getElementById('ht-score').textContent=S.score;saveSession()}
