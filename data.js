@@ -13,10 +13,6 @@ const CONFIG = {
   // ── Admin ─────────────────────────────────────────────────
   adminPassword: "1234",   // ← verander dit vóór de dag zelf!
 
-  // ── Firebase (gratis Spark plan — vul in na aanmaken) ─────
-  // Ga naar https://console.firebase.google.com
-  // Maak een project → Realtime Database → Start in testmodus
-  // Kopieer de config hieronder. GRATIS PLAN = nooit automatisch betaald.
 firebase: {
   apiKey: "AIzaSyCVTgtbB_D1uzA5a6DJmsZM99GjtuY1OH0",
   authDomain: "treasure-hunt-artevelde.firebaseapp.com",
