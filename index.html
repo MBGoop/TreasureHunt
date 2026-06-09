@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1a18">
 <title>Schattenjacht Gent</title>
@@ -18,16 +18,16 @@
   --r:16px;--rs:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--ink);color:var(--paper);overflow:hidden}
-.screen{display:none;position:fixed;inset:0;flex-direction:column;overflow:hidden}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--ink);color:var(--paper)}
+.screen{display:none;position:fixed;inset:0;flex-direction:column}
+#s-hunt,#s-finish{overflow:hidden}
 .screen.active{display:flex}
-#s-intro.screen{position:relative;min-height:100dvh;overflow-y:auto;overflow-x:hidden}
 
 /* INTRO */
 #s-intro{
   background:var(--ink);align-items:center;justify-content:flex-start;
-  text-align:center;padding:0;gap:0;overflow-y:scroll;
-  position:relative;-webkit-overflow-scrolling:touch;
+  text-align:center;padding:0;gap:0;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
 .intro-hero{
   width:100%;background:var(--ink2);
