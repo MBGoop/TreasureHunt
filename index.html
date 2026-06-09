@@ -277,7 +277,7 @@ function mkCompass(st){
   // Toon 8-richtingen kompas op basis van bearing (werkt altijd, ook zonder gyroscoop)
   const dirs = ['↑','↗','→','↘','↓','↙','←','↖'];
   const dirLabels = ['N','NO','O','ZO','Z','ZW','W','NW'];
-  const dirIdx = Math.round(bear / 45) % 8;
+  const dirIdx = Math.round(b / 45) % 8;
   const dirArrow = dirs[dirIdx];
   const dirLabel = dirLabels[dirIdx];
   w.innerHTML=`<div class="compass-card ${cls}">
