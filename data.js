@@ -17,16 +17,15 @@ const CONFIG = {
   // Ga naar https://console.firebase.google.com
   // Maak een project → Realtime Database → Start in testmodus
   // Kopieer de config hieronder. GRATIS PLAN = nooit automatisch betaald.
-const firebaseConfig = {
+firebase: {
   apiKey: "AIzaSyCVTgtbB_D1uzA5a6DJmsZM99GjtuY1OH0",
   authDomain: "treasure-hunt-artevelde.firebaseapp.com",
   databaseURL: "https://treasure-hunt-artevelde-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "treasure-hunt-artevelde",
   storageBucket: "treasure-hunt-artevelde.firebasestorage.app",
   messagingSenderId: "468273847640",
-  appId: "1:468273847640:web:ebcb5046a90e9de0a8192d",
-  measurementId: "G-SJTDGPH8DN"
-};
+  appId: "1:468273847640:web:ebcb5046a90e9de0a8192d"
+},
 
   // ── GPS ───────────────────────────────────────────────────
   unlockRadius:        10,    // meter — hoe dicht voor stop opengaat
