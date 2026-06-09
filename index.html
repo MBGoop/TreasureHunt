@@ -275,15 +275,13 @@ function mkCompass(st){
   const nameHidden = !isOpen(st);
   const destLabel = nameHidden ? '🔒 Onbekend — volg de clue' : `${st.emoji} ${st.name}`;
   // Toon 8-richtingen kompas op basis van bearing (werkt altijd, ook zonder gyroscoop)
-  const dirs = ['↑','↗','→','↘','↓','↙','←','↖'];
-  const dirLabels = ['N','NO','O','ZO','Z','ZW','W','NW'];
-  const dirIdx = Math.round(b / 45) % 8;
-  const dirArrow = dirs[dirIdx];
-  const dirLabel = dirLabels[dirIdx];
+  const arrowColor = cls==='hot' ? '#b84c2b' : cls==='warm' ? '#e0a030' : '#c9922a';
   w.innerHTML=`<div class="compass-card ${cls}">
-    <div class="c-dial" style="flex-direction:column;gap:2px">
-      <span style="font-size:1.8rem;line-height:1;color:var(--gold)">${dirArrow}</span>
-      <span style="font-size:.65rem;font-family:sans-serif;color:var(--mist)">${dirLabel}</span>
+    <div class="c-dial">
+      <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(${b}deg);transition:transform .4s ease" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,3 28,30 18,24 8,30" fill="${arrowColor}" opacity="1"/>
+        <polygon points="18,3 8,30 18,24" fill="${arrowColor}" opacity="0.35"/>
+      </svg>
     </div>
     <div class="c-info">
       <div class="c-dest">Volgende stop: <strong>${destLabel}</strong></div>
