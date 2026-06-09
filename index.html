@@ -24,7 +24,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 /* INTRO */
 #s-intro{
-  background:var(--ink);align-items:center;justify-content:center;
+  background:var(--ink);align-items:center;justify-content:flex-start;
   text-align:center;padding:0;gap:0;overflow-y:auto;
   position:relative;
 }
@@ -34,6 +34,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   display:flex;flex-direction:column;align-items:center;gap:.75rem;
   border-bottom-left-radius:32px;border-bottom-right-radius:32px;
   margin-bottom:1.75rem;
+  border-bottom:none;
 }
 .intro-logo{
   width:64px;height:64px;border-radius:20px;
@@ -60,14 +61,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   transition:opacity .15s,transform .1s;
 }
 .btn-start:active{opacity:.88;transform:scale(.98)}
-.test-block{
-  width:100%;background:var(--ink2);border:1.5px dashed #4a4640;
-  border-radius:var(--r);padding:.9rem 1.1rem;text-align:center;cursor:pointer;
-  transition:border-color .2s;
-}
-.test-block:hover{border-color:var(--gold)}
-.test-block .tb-t{font-size:.85rem;color:var(--paper);margin-bottom:.2rem;font-weight:600}
-.test-block .tb-s{font-size:.73rem;color:var(--mist)}
+
 
 /* HUNT HEADER */
 #s-hunt{background:var(--paper);color:var(--ink)}
@@ -236,10 +230,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <input class="field-inp" id="inp" type="text" placeholder="bv. Team Gravensteen" maxlength="24" autocomplete="off">
     </div>
     <button class="btn-start" onclick="go(false)">Start de jacht &rarr;</button>
-    <div class="test-block" onclick="go(true)">
-      <div class="tb-t">🧪 Testmodus</div>
-      <div class="tb-s">Simuleer GPS-stops zonder fysiek aanwezig te zijn</div>
-    </div>
+
   </div>
 </div>
 
@@ -292,17 +283,25 @@ document.getElementById('h1').innerHTML='Schattenjacht<br><em>'+CONFIG.title.spl
     if(!d)return;
     const p=JSON.parse(d);
     if(!p.team)return;
-    const stop=STOPS[p.idx]||STOPS[0];
-    document.getElementById('resume-block').style.display='block';
-    document.getElementById('resume-team').textContent=p.team;
-    document.getElementById('resume-info').textContent=`Stop ${p.idx+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
-    document.getElementById('inp').placeholder='Of nieuw team...';
-    // change field label
-    document.querySelector('.field-lbl').textContent='Of start nieuw team';
+    const stop=STOPS[Math.min(p.idx||0, STOPS.length-1)];
+    const block=document.getElementById('resume-block');
+    if(block){
+      block.style.display='block';
+      document.getElementById('resume-team').textContent=p.team;
+      document.getElementById('resume-info').textContent=`Stop ${(p.idx||0)+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
+    }
   }catch(e){}
 })();
 document.getElementById('imeta').textContent=CONFIG.subtitle+' · '+CONFIG.date;
 document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
+// testmodus via URL: voeg ?test toe aan de URL (alleen voor organisator)
+if(window.location.search.includes('test')){
+  const tb=document.createElement('div');
+  tb.style.cssText='width:100%;max-width:300px;background:#1e1c19;border:1.5px dashed #4a4640;border-radius:16px;padding:.9rem 1.1rem;text-align:center;cursor:pointer;margin-top:.5rem';
+  tb.innerHTML='<div style="font-size:.85rem;color:#f7f4ee;font-weight:600">🧪 Testmodus</div><div style="font-size:.73rem;color:#9a9690">Simuleer GPS-stops</div>';
+  tb.onclick=()=>go(true);
+  document.querySelector('.intro-form').appendChild(tb);
+}
 
 function resumeSession(){
   try{
@@ -316,7 +315,8 @@ function resumeSession(){
     if(S.test)document.getElementById('test-bar').classList.add('on');
     showScreen('hunt');render();initFB();
     if(!S.test)startGPS();
-    toast(`👋 Welkom terug ${S.team}!`);
+    saveSession();
+  toast(`👋 Welkom terug ${S.team}!`);
   }catch(e){toast('Kon sessie niet herstellen')}
 }
 
@@ -327,6 +327,7 @@ function go(testMode){
   S.team=n;S.test=testMode;
   document.getElementById('ht-team').textContent=n;
   if(testMode)document.getElementById('test-bar').classList.add('on');
+  saveSession();
   showScreen('hunt');render();initFB();
   if(!testMode)startGPS();
   else{document.getElementById('gtxt').textContent='Testmodus — geen echte GPS';document.getElementById('gdot').className='gdot srch'}
@@ -542,7 +543,7 @@ async function doFinish(){
     : pos === 2
     ? `${medal} Tweede plaats! Goed gedaan!`
     : pos === 3
-    ? `${medal} Derde plaats! jah oke, niet slecht! 😉`
+    ? `${medal} Derde plaats! Knap!`
     : `${medal} Plaats ${pos} — goed gepresteerd!`;
   document.getElementById('fpos').textContent = posMsg;
   document.getElementById('fmsg').textContent = `${S.team} · ${S.score} punten · Welkom aan de Multatuli! 🥂`;
