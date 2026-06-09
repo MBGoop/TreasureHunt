@@ -11,39 +11,30 @@ const CONFIG = {
   date:     "Woensdag 24 juni 2026",
 
   // ── Admin ─────────────────────────────────────────────────
-  adminPassword: "1234",   // ← verander dit vóór de dag zelf!
+  adminPassword: "1234",
 
-firebase: {
-  apiKey: "AIzaSyCVTgtbB_D1uzA5a6DJmsZM99GjtuY1OH0",
-  authDomain: "treasure-hunt-artevelde.firebaseapp.com",
-  databaseURL: "https://treasure-hunt-artevelde-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "treasure-hunt-artevelde",
-  storageBucket: "treasure-hunt-artevelde.firebasestorage.app",
-  messagingSenderId: "468273847640",
-  appId: "1:468273847640:web:ebcb5046a90e9de0a8192d"
-},
+  // ── Firebase ──────────────────────────────────────────────
+  firebase: {
+    apiKey:            "AIzaSyCVTgtbB_D1uzA5a6DJmsZM99GjtuY1OH0",
+    authDomain:        "treasure-hunt-artevelde.firebaseapp.com",
+    databaseURL:       "https://treasure-hunt-artevelde-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId:         "treasure-hunt-artevelde",
+    storageBucket:     "treasure-hunt-artevelde.firebasestorage.app",
+    messagingSenderId: "468273847640",
+    appId:             "1:468273847640:web:ebcb5046a90e9de0a8192d"
+  },
 
   // ── GPS ───────────────────────────────────────────────────
-  unlockRadius:        10,    // meter — hoe dicht voor stop opengaat
-  compassActiveFrom:   500,   // meter — vanaf wanneer kompas actief wordt
+  unlockRadius:      10,   // meter — hoe dicht voor stop opengaat
+  compassActiveFrom: 500,  // meter — vanaf wanneer kompas actief wordt
 
   // ── Punten ────────────────────────────────────────────────
-  pointsStop:   2,   // punten voor een stop bereiken
-  pointsQuiz:   3,   // punten voor correct quizantwoord
+  pointsStop: 2,   // punten voor een stop bereiken
+  pointsQuiz: 3,   // punten voor correct quizantwoord
 };
 
 // ═══════════════════════════════════════════════════════════════
-//  STOPS — voeg toe, verwijder of wijzig vrij
-//  Elk stop heeft:
-//    id       : uniek nummer (1, 2, 3, ...)
-//    emoji    : voor weergave
-//    name     : naam van de locatie
-//    lat/lng  : GPS coördinaten (decimale graden)
-//    weetje   : historisch feit dat getoond wordt bij aankomst
-//    clue     : aanwijzing naar de volgende stop
-//    quiz     : { vraag, opties: [...4 teksten], correct: index 0-3 }
-//    cava     : true  →  markeer als cava-stop (optioneel)
-//    finish   : true  →  laatste stop (optioneel)
+//  STOPS
 // ═══════════════════════════════════════════════════════════════
 
 const STOPS = [
