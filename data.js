@@ -6,9 +6,9 @@
 
 const CONFIG = {
   // ── Algemeen ──────────────────────────────────────────────
-  title:    "Schattenjacht Gent",
+  title:    "Fun wandeling",
   subtitle: "Academiejaarafsluiter · Arteveldehogeschool",
-  date:     "Woensdag 24 juni 2025",
+  date:     "Woensdag 24 juni 2026",
 
   // ── Admin ─────────────────────────────────────────────────
   adminPassword: "artevelde2025",   // ← verander dit vóór de dag zelf!
