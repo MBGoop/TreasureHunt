@@ -128,21 +128,21 @@ const STOPS = [
     }
   },
   {
-    id: 9, emoji: "🪁", name: "Walter de buckplein",
+    id: 9, emoji: "🪁", name: "Walter De Buckplein",
     lat: 51.0561170, lng: 3.7274083,
     weetje: "Dit kleine pleintje bij de Sint-Jacobskerk was ooit het stilste en meest vergeten hoekje van Gent. De kerk draagt de naam van de beschermheilige van de pelgrims — reizigers die hier eeuwenlang halt hielden op weg naar Santiago de Compostela. In 1969 veranderde het pleintje voor altijd. Walter De Buck — beeldhouwer, volkszanger en anarchist — zette er een klein podium tegen de kerkgevel, hing wat gekleurde lichtjes op en organiseerde de eerste 'Gentse Fieste gelijk in den tijd'. Met een tweedehands muziekinstallatie en pannenkoeken als catering werd het stilste pleintje van Gent het kloppende hart van de vernieuwde Gentse Feesten. Zijn volkslied 't Vliegerke kennen alle Gentenaars van buiten. In 2017 kreeg het plein zijn naam.",
     clue: "Je verlaat het plein van de man die de oude Gentse liedjes nieuw leven gaf. Maar hij is niet de enige die in Gent iets oerouds deed herleven. Vlakbij is een vrouw die een middeleeuws geheim recept herontdekte — een recept dat eeuwenlang verloren was.",
     quiz: {
-      vraag: "Wat gebruikte Gruut in plaats van hop?",
-      opties: ["Lavendel en rozemarijn", "Gruit — kruiden zoals gagel en alsem", "Jeneverbes en tijm", "Gewone mout"],
-      correct: 1
+      vraag: "Iedereen kent wel t'vliegerke, het volkslied van Walter De Buck. Maar hij vormde samen met twee andere artiesten 'de drie W's' van de Vlaamse folk en kleinkunst in dialect. Wie waren zijn kompanen?",
+      opties: ["Warre Borgmans en Wim Opbrouck", "Wannes Van de Velde en Willem Vermandere", "Wouter Vandenabeele en Wim De Craene", "Ward Bogaert en Wannes Cappelle"],
+      correct: 2
     }
   },
   {
     id: 10, emoji: "🍺", name: "De Gruut Stadsbrouwerij",
     lat: 51.0575406, lng: 3.7302251,
     weetje: "De Gentse Stadsbrouwerij Gruut is een verhaal van een geheim dat eeuwenlang verloren was. In de middeleeuwen verdeelde de Leie de stad in twee: op de rechteroever brouwden biermakers onder Duits gezag met hop, op de linkeroever brouwden ze onder Frans bewind met een mysterieus kruidenmengsel — de 'gruut'. Alleen de landsheer kende het recept, en hij hief er belasting op. In de 16e eeuw verdween de gruut-traditie voorgoed toen hop het overnam. In 2009 besloot brouwingenieur Annick De Splenter het geheim te herontdekken. Samen met de UGent analyseerde ze middeleeuwse kruiden tot ze een recept vond dat werkte. Het resultaat: een bier zachter en ronder dan hopbier, waarbij de volle smaak pas echt tot zijn recht komt.En de naam? 'Gruut' verwijst niet alleen naar de kruiden — het is ook de Gentse naam voor de 'groot', een muntstuk dat onder Keizer Karel als betaalmiddel diende.",
-    clue: "Je staat bij de enige brouwerij in Gent zonder hop. Het huisnummer van je eindbestemming op de Huidevetterskaai is hetzelfde als de leeftijd van iemand die 'veertig' wordt. Dat is de finish!",
+    clue: "Je verlaat nu degene die een oud geheim herontdekte. Volg de zoete geur van het verleden — waar ooit suiker werd geraffineerd, zoek de straat die glanst...",
     quiz: {
       vraag: "Wat gebruikte Gruut in plaats van hop?",
       opties: ["Lavendel en Korianderzaad", "Gagel en Wilde Rozemarijn", "Jeneverbes en Tijm", "Kruidnagel en Kaneel"],
@@ -150,14 +150,25 @@ const STOPS = [
     }
   },
   {
+    id: 11, emoji: "🍺", name: "Artevelde Goudstraat",
+    lat: 51.0575406, lng: 3.7302251,
+    weetje: "De Goudstraat glinstert meer dan je denkt. In 1804 stond hier de suikerraffinaderij De Braecke — en suiker was toen inderdaad zo kostbaar als goud. Maar dat is niet het enige geheim. In datzelfde gebouw richtte een balboogschutterij haar feestzaal in: de zaal Nemrod. En alsof dat niet genoeg is: in dit huis woonde ooit Filips van Artevelde — de zoon van de volksheld die je eerder op de Vrijdagmarkt zag staan. Het bloed kruipt waar het niet gaan kan. Vandaag lopen er studenten rond waar ooit zijn voeten de vloer raakten — de suiker is verdwenen, maar de rijkdom van kennis bleef.",
+    clue: "Je verlaat de straat die glanst als goud of de brug van de zeemeermin. De rijkdom van dit verhaal loopt langs het water. Volg de Leie en zoek de kaai die vernoemd is naar het gilde dat je eerder al tegenkwam — op het plein van de volksheld, bovenop het oudste gebouw. Aan die kaai wacht je eindbestemming.",
+    quiz: {
+      vraag: "We keren even terug naar de Minnemeers. Zij dankt haar naam aan een volkslegende over een meermin. Wat deed de meermin toen een man haar wilde kussen?",
+      opties: ["Ze zong hem in slaap en verdween onder water", "Ze gaf hem een fikse oorveeg en proestte het uit", "Ze trok hem mee de diepte in", "Ze verwenste hem zodat hij voorgoed in de Leie moest leven"],
+      correct: 2
+    }
+  },
+  {
     id: 11, emoji: "🏁", name: "Multatuli",
     lat: 51.06106, lng: 3.72782,
     finish: true,
-    weetje: "'Multatuli' betekent in het Latijn: ik heb veel gedragen. Het pseudoniem van schrijver Eduard Douwes Dekker (1820-1887), bekend om zijn aanklacht tegen het kolonialisme in Nederlands-Indië. Toepasselijk afsluiter voor een zwaar academiejaar!",
+    weetje: "'Proficiat — jullie hebben het gehaald! En de naam van deze plek is toepasselijker dan je denkt. 'Multatuli' betekent in het Latijn: ik heb veel gedragen. Het was het pseudoniem van Eduard Douwes Dekker (1820-1887), een Nederlandse schrijver die de wereld schudde met zijn aanklacht tegen het kolonialisme in Nederlands-Indië. Hij koos die naam bewust — als symbool voor alles wat hij had meegemaakt en gedragen. Na een namiddag vol raadsels, valstrikken en historische weetjes door Gent... klinkt dat wel een beetje bekend, niet? Smakelijk eten — jullie hebben het verdiend.",
     clue: "🏁 FINISH! Jullie hebben de schattenjacht voltooid. Ga naar binnen en meld jullie aankomst!",
     quiz: {
-      vraag: "Wat betekent 'Multatuli' in het Latijn?",
-      opties: ["Ik heb veel gereisd", "Ik heb veel gedragen", "Ik heb veel geleerd", "Ik heb veel gezien"],
+      vraag: "En als laatste... Eduard Douwes Dekker schreef zijn bekendste werk onder het pseudoniem Multatuli. Hoe heet dat boek?",
+      opties: ["Het ABC in het onderwijs", "Max Havelaar", "Camera Obscura", "De Roos van Dekama"],
       correct: 2
     }
   }
