@@ -161,7 +161,7 @@ const STOPS = [
     }
   },
   {
-    id: 11, emoji: "🏁", name: "Multatuli",
+    id: 12, emoji: "🏁", name: "Multatuli",
     lat: 51.06106, lng: 3.72782,
     finish: true,
     weetje: "'Proficiat — jullie hebben het gehaald! En de naam van deze plek is toepasselijker dan je denkt. 'Multatuli' betekent in het Latijn: ik heb veel gedragen. Het was het pseudoniem van Eduard Douwes Dekker (1820-1887), een Nederlandse schrijver die de wereld schudde met zijn aanklacht tegen het kolonialisme in Nederlands-Indië. Hij koos die naam bewust — als symbool voor alles wat hij had meegemaakt en gedragen. Na een namiddag vol raadsels, valstrikken en historische weetjes door Gent... klinkt dat wel een beetje bekend, niet? Smakelijk eten — jullie hebben het verdiend.",
