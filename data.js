@@ -42,7 +42,7 @@ const STOPS = [
     id: 1, emoji: "⚓", name: "Graslei",
     lat: 51.05477, lng: 3.72075,
     weetje: "De Graslei was de economische hartader van Gent. De gildehuizen dateren van de 12e tot 17e eeuw — elk was eigendom van een ander gilde. Aan de overkant op de Korenlei staat het huis 'De Zwane' met twee zwanen op de gevel die met de RUG naar elkaar staan — een teken van onenigheid tussen de schippers die er vroeger handelden.",
-    clue: "Je staat aan de mooiste kaai van Gent. Kijk naar de overkant van het water. Twee dieren staan op een gevel, maar ze kijken niet naar elkaar. Welk dier? Dat dier staat ook op een brugleuning vlakbij — loop naar die brug.",
+    clue: "Hier stond vroeger ergens een houten draaibrug uit 1754. Maar welke is het? Ga ernaartoe… ",
     quiz: {
       vraag: "Waarom staan de zwanen op 'De Zwane' met de RUG naar elkaar?",
       opties: ["Twee rivaliserende schippersfamilies", "De ene symboliseert vrouwen, de ander alcohol", "De architect vond het mooier in perfecte symmetrie.", "De stenhouwer maakte een fout "],
@@ -52,8 +52,8 @@ const STOPS = [
   {
     id: 2, emoji: "🌉", name: "Sint-Michielsbrug",
     lat: 51.05388, lng: 3.72054,
-    weetje: "De Sint-Michielsbrug werd gebouwd in 1905-1909 voor de wereldtentoonstelling van 1913. Vanop de brug heb je het iconische zicht op de DRIE GENTSE TORENS: Sint-Niklaaskerk, Belfort en Sint-Baafskathedraal. Vroeger stond hier een platte draaibrug die de tram constant ophield.",
-    clue: "Je staat op de brug met het mooiste uitzicht van Gent. Drie torens op een rij. De MIDDELSTE toren heeft een dier bovenop als stadssymbool — welk dier? De straat die zijn naam draagt, ligt naast de oudste vleesmarkt van Gent.",
+    weetje: "De Sint-Michielsbrug in Gent werd gebouwd tussen 1905 en 1909 en werd ontworpen door Louis Cloquet. Ze verving een houten draaibrug uit 1754 en is vandaag een van de bekendste kijkpunten over de historische binnenstad.",
+    clue: "Volg het water naar de plek waar de markt begint...",
     quiz: {
       vraag: "Welk dier staat bovenop het Belfort van Gent?",
       opties: ["Een leeuw", "Een adelaar", "Een draak", "Een griffioen"],
@@ -63,30 +63,30 @@ const STOPS = [
   {
     id: 3, emoji: "🥩", name: "Groot Vleeshuis",
     lat: 51.05593, lng: 3.72181,
-    weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Ze werden 'Prinsenkinderen' genoemd. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
+    weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
     clue: "Je staat voor het gebouw waar alleen 'Prinsenkinderen' vlees mochten verkopen. Scheepjes voeren vroeger ONDER dit gebouw door. Kijk aan de zijkant — tel het aantal bogen. Dat getal = het aantal letters van je volgende stop: een bouwwerk dat ook als katoenfabriek heeft gediend.",
     quiz: {
       vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
       opties: ["De Gildebroeders", "De Prinsenkinderen", "De Koningszonen", "De Ambachtsmeesters"],
-      correct: 1
+      correct: 2
     }
   },
   {
     id: 4, emoji: "🏰", name: "Gravensteen",
     lat: 51.05718, lng: 3.72072,
-    weetje: "Het Gravensteen was burcht, gevangenis, folterplaats én katoenfabriek. Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
-    clue: "Dit bouwwerk was ooit een katoenfabriek. Op het plein voor het kasteel knipperen de lantaarnpalen bij elke geboorte in Gent. Tel het aantal lantaarnpalen. Dat getal min één = huisnummer van je volgende stop op de Kraanlei.",
+    weetje: "Het Gravensteen was burcht, gevangenis, folterplaats, rechtbank én ... Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
+    clue: "Naast dit kasteel staat een kapel waar in 1337 bloed vloeide tussen twee families. Als boetedoening voor die moordpartij moesten ze een godshuis bouwen. Zoek dat gebouw.",
     quiz: {
-      vraag: "Wat gebeurt er op het Sint-Veerleplein bij elke geboorte in Gent?",
-      opties: ["Er klinkt een klokgelui", "De lantaarnpalen knipperen", "Een vlag wordt gehesen", "Een fonteintje springt aan"],
-      correct: 1
+      vraag: "Wat was het gravensteen ook al eens, naast burcht en gevangenis?",
+      opties: ["Een klooster", "Een brouwerij", "Een graanopslagplaats", "Een katoenfabriek"],
+      correct: 4
     }
   },
   {
-    id: 5, emoji: "🦅", name: "Kraanlei",
+    id: 5, emoji: "🦅", name: "Het huis van Alijn",
     lat: 51.05695, lng: 3.72263,
-    weetje: "De naam 'Kraanlei' komt van een houten kraanmachine die hier stond tot 1836 om wijnvaten te lossen. Het Huis van Alijn (nr. 65) werd gebouwd in 1363 als boetedoening nadat twee families een bloedige vete uitvochten op een bruiloft.",
-    clue: "Zoek het gebouw op nr. 65 — gebouwd als boetedoening na een bloedige bruiloftsvete. Boven de ingang staat een woord. De eerste letter wijst je naar een steeg richting het Patershol, de wijk van de schoenmakers.",
+    weetje: "Dit is het enige volledig bewaarde godshuis van Gent. Ooit bood het gratis onderdak aan armen, zieken en weduwen in kleine witgekalkte huisjes rond een binnentuin. Vandaag vertelt het museum hier het verhaal van het dagelijkse leven in de 20e eeuw — van keukengerief tot kinderspeelgoed.",
+    clue: "Vervolg je weg naar de volgende wijk waar straatnamen de oude ambachten verraden. Zoek de straat dat de maken heeft met een spaanse stad",
     quiz: {
       vraag: "Waarom werd het Huis van Alijn gebouwd in 1363?",
       opties: ["Als woonst voor de burgemeester", "Als boetedoening na een bloedige bruiloftsvete", "Als opslagplaats voor wijn", "Als zetel van het schippersgilde"],
@@ -96,22 +96,22 @@ const STOPS = [
   {
     id: 6, emoji: "👟", name: "Patershol",
     lat: 51.05770, lng: 3.72289,
-    weetje: "'Corduwaniers' waren schoenmakers die werkten met leder uit het Spaanse Córdoba. Het Patershol was in de middeleeuwen géén arme buurt — hier woonden de rijkste magistraten en advocaten van Gent, verbonden aan de Raad van Vlaanderen in het Gravensteen.",
-    clue: "Je staat in de straat van de schoenmakers met leder uit Spanje. Zoek de hoek waar twee straatnamen samenkomen waarvan één een KLEUR is. Die straat brengt je naar een plein met een kanon zo groot als een auto.",
+    weetje: "'Corduwaniers' waren schoenmakers die werkten met leder uit een spaanse stad in de wijk. De naam 'Patershol' heeft een verrassende oorsprong. Toen de karmelieten hun klooster wilden uitbreiden, bouwden ze gewoon over de Plotersgracht heen — de enige waterbron van de buurt. Als compromis lieten ze een klein, laag poortje open in de muur. Via een steile trap daalde je af naar een overkluisde, donkere ruimte om toch nog bij het water te geraken. De Gentenaars noemden die duistere doorgang spottend 'het hol van de paters' — en zo kreeg de hele wijk haar naam.",
+    clue: "Je staat nu in de wijk van de ambachtslieden. De smalle straatjes lopen allemaal uit op één plein — het marktplein van de gilden. Zoek de uitgang via de straat die verwijst naar geld. Op dat plein wacht een symbolische ijzeren vrouw met een grote mond — maar in de praktijk heeft ze nooit echt iets gezegd. Ze staat er al eeuwen te kijken. Zoek haar.",
     quiz: {
-      vraag: "Welk soort leder gebruikten de 'corduwaniers'?",
-      opties: ["Rundsleder uit Gent", "Schaapsleder uit Brugge", "Leder uit het Spaanse Córdoba", "Paardenleder uit Brussel"],
-      correct: 2
+      vraag: "Maar welk soort leder gebruikten nu de 'corduwaniers'?",
+      opties: ["Rundsleder uit het Spaanse Barcelona en Igualada", "Rundsleder uit het Spaanse Valladolid", "Leder uit het Spaanse Córdoba", "Paardenleder uit het Spaanse Ubrique"],
+      correct: 3
     }
   },
   {
     id: 7, emoji: "💣", name: "Dulle Griet",
     lat: 51.05730, lng: 3.72415,
-    weetje: "De Dulle Griet is een bombarde uit 1430-1448, 5,31m lang en bijna 17.000 kg zwaar. The Guardian verkoos café Dulle Griet als 'vermoedelijk beste bar ter wereld'. Je moet er je SCHOEN afgeven als onderpand voor een Kwak-glas.",
-    clue: "Voor je staat een kanon van bijna 17.000 kg. Het café ernaast werd verkozen als beste bar ter wereld. Als je een Kwak bestelt, geef je iets af als onderpand. Wat is dat? Het aantal letters = het aantal minuten stappen naar het plein van de volksheld.",
+    weetje: "Het kanon heette oorspronkelijk de 'groten rooden duyvele' — naar zijn vuurrode smeedijzer. Toen het voor het eerst afgevuurd werd, maakte het zo'n oorverdovend lawaai en zulke rookwolken dat het leek alsof de hel was losgebroken. In de volksmond was een 'dulle griet' ook een bazige, kijvende vrouw die de baas wilde spelen. De Dulle Griet heeft wel een bewogen verleden. Keizer Karel strafte Gent door alle wapens in beslag te nemen… tot de Spanjaarden aan de deur klopten en de Gentenaars plots kanonnen nodig hadden. Oplossing: op zoek gaan naar alles wat schiet of ontploft. In Oudenaarde vonden ze een reusachtig rood kanon, achtergelaten door het Bourgondische leger. De Gentenaars namen het mee. Het ding woog oorspronkelijk 12.500 kg. Met man en macht gehesen in een boot, gevaren naar Gent, maar het kanon haalde zijn eindbestemming, het St. Pietersplein, nooit. Het bleef steken in de buurt  van de Vrijdagmarkt. Het kanon is ondertussen in de loop van de jaren ongeveer 250 kilogram lichter geworden door het roest. ",
+    clue: "Je hebt de bazige vrouw gevonden. Maar op dit plein staat ook een man die Gent ooit redde met zijn mond in plaats van met een kanon. Hij sloot een slim verbond met een vreemde mogendheid en wees daarbij letterlijk de richting aan.",
     quiz: {
-      vraag: "Wat geef je als onderpand voor een Kwak-bier bij café Dulle Griet?",
-      opties: ["Je portemonnee", "Je identiteitskaart", "Je schoen", "Je sleutels"],
+      vraag: "Herberg de Dulle Griet serveert de 'Max van 't Huis': een gigantisch glas van 1,2 liter Kwak in een houten standaard. Omdat het glas kostbaar is en tegen diefstal, moet je iets afgeven als borg. Wat is dat?",
+      opties: ["Je portemonnee", "Je identiteitskaart", "Je schoen", "Je huissleutels"],
       correct: 3
     }
   },
@@ -119,19 +119,19 @@ const STOPS = [
     id: 8, emoji: "🥂", name: "Vrijdagmarkt",
     lat: 51.05697, lng: 3.72564,
     cava: true,
-    weetje: "De Vrijdagmarkt is marktplaats sinds 1199 — een van de oudste van Europa. Jacob van Artevelde wijst met zijn hand richting Engeland als symbool van het handelsverbond dat hij sloot. Het Toreken is het oudste gebouw van het plein (15e eeuw).",
-    clue: "🥂 CAVA-STOP! MB en Kimberly staan klaar. Even bekomen. Na de cava: zoek het oudste en kleinste gebouw op het plein — een torentje met trapgevel. De straat achter dat gebouw brengt je naar een brouwerij met een middeleeuws geheim.",
+    weetje: "De Vrijdagmarkt is het bloedigste en meest dramatische plein van Gent. Hier werden vorsten plechtig ontvangen bij hun 'Blijde Inkomst', maar ook vetes beslecht en terechtstellingen voltrokken. In 1796 viel voor het eerst het hoofd onder de guillotine op dit plein. De beroemdste figuur is Jacob van Artevelde — lakenkoopman, volksleider en de machtigste man van Gent. In 1340 riep hij hier de Engelse koning Eduard III uit tot koning van Frankrijk, waarmee hij tegelijk de graaf van Vlaanderen én de Franse koning tartte. Zijn vinger wijst nog steeds richting Engeland. Vijf jaar later vermoordden wevers en volders elkaar op ditzelfde plein — als bloedige aftrap voor de moord op Van Artevelde zelf door de deken van de rijke wevers. Het enige overgebleven middeleeuwse gebouw is het 15e-eeuwse Toreken, het vroegere gildehuis van de huidevetters.",
+    clue: "Je verlaat de man die Gent redde met een handdruk. Maar er is ook een held die Gent redde met een lied. Zoek de kerk van de pelgrim en het pleintje waar elk jaar iets opstijgt. ",
     quiz: {
-      vraag: "Hoe oud is de Vrijdagmarkt als marktplaats?",
-      opties: ["Sinds de 14e eeuw", "Sinds 1199 — meer dan 825 jaar", "Sinds de Napoleontische tijd", "Sinds de Gentse Feesten"],
+      vraag: "Kijk omhoog naar het dak van het Toreken. Daar staat een figuur die al eeuwen over het plein waakt. Ze heeft een naam die klinkt als een melodie. Wie is zij?",
+      opties: ["Margriete — de Gentse volksheldin die de stad redde van de Spanjaarden", "Mammelokker — het vrouwelijk symbool van Gentse barmhartigheid", "Melusine — de zeemeermin, door de huidevetters meegebracht als oorlogsbuit na een veldslag", "Mélisande — de watergeest uit de Leie, als geschenk van de graaf van Vlaanderen"],
       correct: 1
     }
   },
   {
-    id: 9, emoji: "🍺", name: "Gruut Stadsbrouwerij",
-    lat: 51.05757, lng: 3.73023,
-    weetje: "De Gruut Stadsbrouwerij brouwt bier zonder hop, op basis van een middeleeuws kruidenrecept: gagel, alsem en gember. Vóór de hoprevolutie in de 14e-15e eeuw was gruit de standaard smaakgever van bier in de Lage Landen.",
-    clue: "Je staat bij de enige brouwerij in Gent zonder hop. Het huisnummer van je eindbestemming op de Huidevetterskaai is hetzelfde als de leeftijd van iemand die 'veertig' wordt. Dat is de finish!",
+    id: 9, emoji: "🪁", name: "Walter de buckplein",
+    lat: 51.0561170, lng: 3.7274083,
+    weetje: "Dit kleine pleintje bij de Sint-Jacobskerk was ooit het stilste en meest vergeten hoekje van Gent. De kerk draagt de naam van de beschermheilige van de pelgrims — reizigers die hier eeuwenlang halt hielden op weg naar Santiago de Compostela. In 1969 veranderde het pleintje voor altijd. Walter De Buck — beeldhouwer, volkszanger en anarchist — zette er een klein podium tegen de kerkgevel, hing wat gekleurde lichtjes op en organiseerde de eerste 'Gentse Fieste gelijk in den tijd'. Met een tweedehands muziekinstallatie en pannenkoeken als catering werd het stilste pleintje van Gent het kloppende hart van de vernieuwde Gentse Feesten. Zijn volkslied 't Vliegerke kennen alle Gentenaars van buiten. In 2017 kreeg het plein zijn naam.",
+    clue: "Je verlaat het plein van de man die de oude Gentse liedjes nieuw leven gaf. Maar hij is niet de enige die in Gent iets oerouds deed herleven. Vlakbij is een vrouw die een middeleeuws geheim recept herontdekte — een recept dat eeuwenlang verloren was.",
     quiz: {
       vraag: "Wat gebruikte Gruut in plaats van hop?",
       opties: ["Lavendel en rozemarijn", "Gruit — kruiden zoals gagel en alsem", "Jeneverbes en tijm", "Gewone mout"],
@@ -139,7 +139,18 @@ const STOPS = [
     }
   },
   {
-    id: 10, emoji: "🏁", name: "Multatuli",
+    id: 10, emoji: "🍺", name: "De Gruut Stadsbrouwerij",
+    lat: 51.0575406, lng: 3.7302251,
+    weetje: "De Gentse Stadsbrouwerij Gruut is een verhaal van een geheim dat eeuwenlang verloren was. In de middeleeuwen verdeelde de Leie de stad in twee: op de rechteroever brouwden biermakers onder Duits gezag met hop, op de linkeroever brouwden ze onder Frans bewind met een mysterieus kruidenmengsel — de 'gruut'. Alleen de landsheer kende het recept, en hij hief er belasting op. In de 16e eeuw verdween de gruut-traditie voorgoed toen hop het overnam. In 2009 besloot brouwingenieur Annick De Splenter het geheim te herontdekken. Samen met de UGent analyseerde ze middeleeuwse kruiden tot ze een recept vond dat werkte. Het resultaat: een bier zachter en ronder dan hopbier, waarbij de volle smaak pas echt tot zijn recht komt.En de naam? 'Gruut' verwijst niet alleen naar de kruiden — het is ook de Gentse naam voor de 'groot', een muntstuk dat onder Keizer Karel als betaalmiddel diende.",
+    clue: "Je staat bij de enige brouwerij in Gent zonder hop. Het huisnummer van je eindbestemming op de Huidevetterskaai is hetzelfde als de leeftijd van iemand die 'veertig' wordt. Dat is de finish!",
+    quiz: {
+      vraag: "Wat gebruikte Gruut in plaats van hop?",
+      opties: ["Lavendel en Korianderzaad", "Gagel en Wilde Rozemarijn", "Jeneverbes en Tijm", "Kruidnagel en Kaneel"],
+      correct: 2
+    }
+  },
+  {
+    id: 11, emoji: "🏁", name: "Multatuli",
     lat: 51.06106, lng: 3.72782,
     finish: true,
     weetje: "'Multatuli' betekent in het Latijn: ik heb veel gedragen. Het pseudoniem van schrijver Eduard Douwes Dekker (1820-1887), bekend om zijn aanklacht tegen het kolonialisme in Nederlands-Indië. Toepasselijk afsluiter voor een zwaar academiejaar!",

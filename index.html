@@ -85,7 +85,6 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   border-radius:99px;padding:.32rem 1rem;
   font-size:.82rem;font-weight:700;letter-spacing:.02em;
 }
-
 .test-bar{background:#1f1800;border-bottom:1px solid #4a3800;padding:.5rem 1.1rem;display:none;align-items:center;gap:.6rem}
 .test-bar.on{display:flex}
 .test-bar-lbl{font-size:.72rem;color:var(--gold);font-weight:700;flex:1}
@@ -96,30 +95,33 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .prog-fill{height:100%;background:var(--gold);transition:width .5s ease;border-radius:0 99px 99px 0}
 .hunt-scroll{flex:1;overflow-y:auto;padding-bottom:1.5rem}
 
-/* COMPASS */
-.compass-wrap{padding:1rem 1rem .6rem}
-.compass-card{
-  background:var(--ink);border-radius:20px;padding:1.1rem 1.2rem;
-  display:flex;align-items:center;gap:1.1rem;border:1px solid #2e2a26;
+/* RADAR */
+.radar-wrap{padding:1.2rem 1rem .6rem;display:flex;flex-direction:column;align-items:center}
+.radar-card{
+  background:var(--ink);border-radius:20px;padding:1.4rem 1.2rem;
+  display:flex;flex-direction:column;align-items:center;gap:.9rem;
+  border:1px solid #2e2a26;width:100%;
 }
-.compass-card.warm{border-color:#c9922a55}
-.compass-card.hot{border-color:var(--brick);animation:hotring 1.2s infinite}
-@keyframes hotring{0%,100%{box-shadow:0 0 0 0 rgba(192,66,42,.3)}50%{box-shadow:0 0 0 10px rgba(192,66,42,0)}}
-.c-dial{
-  width:58px;height:58px;border-radius:50%;
-  background:#0e0c0a;border:2px solid #333;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-}
-.c-info{flex:1;min-width:0}
-.c-dest{font-size:.7rem;color:var(--mist);margin-bottom:.25rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;letter-spacing:.03em;text-transform:uppercase}
-.c-dest strong{color:var(--paper);text-transform:none;letter-spacing:0}
-.c-dist{font-size:2rem;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-.03em}
-.compass-card.warm .c-dist{color:#e0a030}
-.compass-card.hot .c-dist{color:var(--brick)}
-.c-temp{font-size:.72rem;margin-top:.3rem;color:var(--mist);font-weight:500}
-.c-temp.warm{color:#e0a030}
-.c-temp.hot{color:var(--brick);font-weight:700}
-.c-temp.here{color:var(--moss);font-weight:700}
+.radar-blob-wrap{position:relative;width:80px;height:80px;display:flex;align-items:center;justify-content:center}
+.radar-ring{position:absolute;width:80px;height:80px;border-radius:50%;opacity:0;animation:radarping 2s ease-out infinite}
+.radar-ring:nth-child(2){animation-delay:.6s}
+.radar-ring:nth-child(3){animation-delay:1.2s}
+@keyframes radarping{0%{transform:scale(.3);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.radar-blob{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;z-index:1;transition:background .5s ease}
+.radar-status{font-size:.85rem;font-weight:600;letter-spacing:.02em;text-align:center}
+.radar-hint{font-size:.72rem;color:var(--mist);text-align:center;line-height:1.5}
+.state-cold .radar-ring{background:#3a6ea8}
+.state-cold .radar-blob{background:#1a3d6e}
+.state-cold .radar-status{color:#6aaeee}
+.state-warm .radar-ring{background:#7e57c5}
+.state-warm .radar-blob{background:#4a2d8a}
+.state-warm .radar-status{color:#b899f0}
+.state-hot .radar-ring{background:#c05820}
+.state-hot .radar-blob{background:#8a3010}
+.state-hot .radar-status{color:#f08040}
+.state-here .radar-ring{background:var(--gold);animation:radarping .8s ease-out infinite}
+.state-here .radar-blob{background:var(--gold)}
+.state-here .radar-status{color:var(--gold)}
 
 /* LOCKED */
 .locked-card{
@@ -155,15 +157,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .flow-section{padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
 .flow-section:last-child{border-bottom:none}
 .clue-section{background:#fdfcf8}
-.flow-divider{
-  font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;
-  font-weight:700;color:var(--mist);margin-bottom:.65rem;
-}
+.flow-divider{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--mist);margin-bottom:.65rem}
 .btn-next{
   width:100%;margin-top:1rem;background:var(--gold);color:#1a1200;
   border:none;border-radius:var(--r);padding:.9rem;
-  font-size:.95rem;font-family:inherit;font-weight:700;cursor:pointer;
-  transition:opacity .15s;
+  font-size:.95rem;font-family:inherit;font-weight:700;cursor:pointer;transition:opacity .15s;
 }
 .btn-next:active{opacity:.85}
 .ibox{border-left:3px solid;border-radius:0 var(--rs) var(--rs) 0;padding:.9rem 1rem;font-size:.9rem;line-height:1.75}
@@ -187,7 +185,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .qfb.ok{color:#1a3820;background:var(--moss-l)}
 .qfb.nok{color:#3a1008;background:var(--brick-l)}
 .q-done{text-align:center;color:var(--moss);font-family:sans-serif;font-size:.88rem;font-weight:600;padding:.5rem 0}
-.btn-fin{width:100%;margin-top:1rem;background:var(--moss);color:white;border:none;border-radius:var(--r);padding:1rem;font-size:1rem;font-family:Georgia,serif;font-weight:bold;cursor:pointer}
+.btn-fin{width:100%;margin-top:1rem;background:var(--moss);color:white;border:none;border-radius:var(--r);padding:1rem;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer}
 .btn-fin:active{opacity:.85}
 
 /* FINISH */
@@ -227,9 +225,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 <div id="s-intro" class="screen active">
   <div class="intro-hero">
     <svg viewBox="0 0 380 180" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-bottom:-4px">
-      <!-- sky -->
       <rect width="380" height="180" fill="#1e1a22"/>
-      <!-- stars -->
       <circle cx="40" cy="20" r="1.2" fill="#d4c9f5" opacity=".7"/>
       <circle cx="90" cy="35" r="1" fill="#d4c9f5" opacity=".5"/>
       <circle cx="150" cy="15" r="1.5" fill="#d4c9f5" opacity=".6"/>
@@ -239,40 +235,31 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <circle cx="355" cy="14" r="1.3" fill="#d4c9f5" opacity=".6"/>
       <circle cx="70" cy="50" r=".8" fill="#d4c9f5" opacity=".4"/>
       <circle cx="340" cy="50" r=".8" fill="#d4c9f5" opacity=".4"/>
-      <!-- leie water -->
       <rect x="0" y="148" width="380" height="32" fill="#2a1f3d"/>
       <rect x="0" y="151" width="380" height="4" fill="#3d2a5c" opacity=".5"/>
-      <!-- water reflections -->
       <rect x="80" y="154" width="40" height="2" rx="1" fill="#7e57c5" opacity=".3"/>
       <rect x="170" y="157" width="30" height="2" rx="1" fill="#7e57c5" opacity=".25"/>
       <rect x="260" y="155" width="50" height="2" rx="1" fill="#7e57c5" opacity=".2"/>
-      <!-- Sint-Niklaaskerk (links) -->
       <rect x="30" y="90" width="50" height="58" fill="#2d2540"/>
       <rect x="38" y="75" width="34" height="20" fill="#2d2540"/>
       <rect x="48" y="55" width="14" height="25" fill="#3d3058"/>
       <polygon points="55,30 48,55 62,55" fill="#7e57c5"/>
       <rect x="36" y="95" width="10" height="15" fill="#1e1a22"/>
       <rect x="54" y="95" width="10" height="15" fill="#1e1a22"/>
-      <!-- ramen niklaas -->
       <rect x="38" y="80" width="7" height="9" rx="3" fill="#7e57c5" opacity=".4"/>
       <rect x="55" y="80" width="7" height="9" rx="3" fill="#7e57c5" opacity=".4"/>
-      <!-- Belfort (midden) - groot -->
       <rect x="155" y="80" width="70" height="68" fill="#251f38"/>
       <rect x="163" y="60" width="54" height="26" fill="#251f38"/>
       <rect x="172" y="42" width="36" height="24" fill="#2d2540"/>
       <rect x="180" y="22" width="20" height="24" fill="#2d2540"/>
       <polygon points="190,2 180,22 200,22" fill="#7e57c5"/>
-      <!-- draak op belfort -->
       <circle cx="190" cy="4" r="2.5" fill="#d4c9f5"/>
-      <!-- klokken belfort -->
       <rect x="165" y="65" width="12" height="14" rx="6" fill="#1e1a22"/>
       <rect x="183" y="65" width="12" height="14" rx="6" fill="#1e1a22"/>
       <rect x="201" y="65" width="12" height="14" rx="6" fill="#1e1a22"/>
-      <!-- ramen belfort -->
       <rect x="165" y="88" width="10" height="13" rx="2" fill="#7e57c5" opacity=".35"/>
       <rect x="183" y="88" width="14" height="13" rx="2" fill="#7e57c5" opacity=".35"/>
       <rect x="201" y="88" width="10" height="13" rx="2" fill="#7e57c5" opacity=".35"/>
-      <!-- Sint-Baafs (rechts) -->
       <rect x="290" y="88" width="60" height="60" fill="#2d2540"/>
       <rect x="298" y="72" width="44" height="22" fill="#2d2540"/>
       <rect x="308" y="52" width="24" height="24" fill="#3d3058"/>
@@ -282,13 +269,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <rect x="334" y="94" width="12" height="16" fill="#1e1a22"/>
       <rect x="300" y="77" width="8" height="10" rx="3" fill="#7e57c5" opacity=".4"/>
       <rect x="318" y="77" width="8" height="10" rx="3" fill="#7e57c5" opacity=".4"/>
-      <!-- Gravensteen toren (ver links) -->
       <rect x="0" y="108" width="28" height="40" fill="#231d35"/>
       <rect x="4" y="98" width="20" height="14" fill="#231d35"/>
       <rect x="0" y="95" width="4" height="8" fill="#2d2540"/>
       <rect x="24" y="95" width="4" height="8" fill="#2d2540"/>
       <rect x="12" y="93" width="4" height="8" fill="#2d2540"/>
-      <!-- huizen langs de leie -->
       <rect x="95" y="118" width="22" height="30" fill="#2a2040"/>
       <polygon points="95,118 106,108 117,118" fill="#3d2a5c"/>
       <rect x="100" y="124" width="7" height="9" fill="#1e1a22"/>
@@ -296,12 +281,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <polygon points="121,120 131,111 141,120" fill="#362350"/>
       <rect x="125" y="126" width="6" height="8" fill="#1e1a22"/>
       <rect x="134" y="126" width="6" height="8" fill="#1e1a22"/>
-      <!-- lichten aan -->
       <rect x="101" y="125" width="7" height="9" fill="#7e57c5" opacity=".5"/>
       <rect x="125" y="127" width="6" height="8" fill="#7e57c5" opacity=".4"/>
-      <!-- voorgrond kade -->
       <rect x="0" y="143" width="380" height="8" fill="#1a1428"/>
-      <!-- lantaarnpalen -->
       <line x1="60" y1="120" x2="60" y2="148" stroke="#4a3870" stroke-width="1.5"/>
       <circle cx="60" cy="119" r="3" fill="#7e57c5" opacity=".8"/>
       <line x1="180" y1="115" x2="180" y2="148" stroke="#4a3870" stroke-width="1.5"/>
@@ -315,18 +297,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     </div>
   </div>
   <div class="intro-form">
-    <div id="resume-block" style="display:none;background:#1e1c19;border:1.5px solid #c9922a;border-radius:16px;padding:.9rem 1.1rem;text-align:left;cursor:pointer" onclick="resumeSession()">
-      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#9a9690;font-weight:600;margin-bottom:.3rem">Sessie hervatten</div>
-      <div style="font-size:1rem;font-weight:700;color:#f7f4ee" id="resume-team">—</div>
-      <div style="font-size:.78rem;color:#d4941a;margin-top:.2rem" id="resume-info">—</div>
-      <div style="font-size:.72rem;color:#9a9690;margin-top:.5rem">Tik om verder te gaan →</div>
+    <div id="resume-block" style="display:none;background:#1e1c19;border:1.5px solid #7e57c5;border-radius:16px;padding:.9rem 1.1rem;text-align:left;cursor:pointer" onclick="resumeSession()">
+      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#9a90b0;font-weight:600;margin-bottom:.3rem">Sessie hervatten</div>
+      <div style="font-size:1rem;font-weight:700;color:#f7f4ff" id="resume-team">—</div>
+      <div style="font-size:.78rem;color:#7e57c5;margin-top:.2rem" id="resume-info">—</div>
+      <div style="font-size:.72rem;color:#9a90b0;margin-top:.5rem">Tik om verder te gaan →</div>
     </div>
     <div class="field-block">
       <div class="field-lbl">Of start nieuw team</div>
       <input class="field-inp" id="inp" type="text" placeholder="bv. Team Gravensteen" maxlength="24" autocomplete="off">
     </div>
     <button class="btn-start" onclick="go(false)">Start de jacht &rarr;</button>
-
   </div>
 </div>
 
@@ -371,6 +352,8 @@ const S={team:'',score:0,pos:null,heading:null,idx:0,quizDone:new Set(),tab:{},t
 
 // boot
 document.getElementById('h1').innerHTML=CONFIG.title;
+document.getElementById('imeta').textContent=CONFIG.subtitle+' · '+CONFIG.date;
+document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
 
 // check for existing session on load
 (function(){
@@ -379,17 +362,17 @@ document.getElementById('h1').innerHTML=CONFIG.title;
     if(!d)return;
     const p=JSON.parse(d);
     if(!p.team)return;
-    const stop=STOPS[p.idx]||STOPS[0];
-    document.getElementById('resume-block').style.display='block';
-    document.getElementById('resume-team').textContent=p.team;
-    document.getElementById('resume-info').textContent=`Stop ${p.idx+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
-    document.getElementById('inp').placeholder='Of nieuw team...';
-    // change field label
-    document.querySelector('.field-lbl').textContent='Of start nieuw team';
+    const stop=STOPS[Math.min(p.idx||0,STOPS.length-1)];
+    const block=document.getElementById('resume-block');
+    if(block){
+      block.style.display='block';
+      document.getElementById('resume-team').textContent=p.team;
+      document.getElementById('resume-info').textContent=`Stop ${(p.idx||0)+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
+    }
   }catch(e){}
 })();
-document.getElementById('imeta').textContent=CONFIG.subtitle+' · '+CONFIG.date;
-document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
+
+// testmodus via ?test URL
 if(window.location.search.includes('test')){
   const tb=document.createElement('div');
   tb.className='test-block';
@@ -408,6 +391,7 @@ function resumeSession(){
     document.getElementById('ht-team').textContent=S.team;
     document.getElementById('ht-score').textContent=S.score;
     if(S.test)document.getElementById('test-bar').classList.add('on');
+    saveSession();
     showScreen('hunt');render();initFB();
     if(!S.test)startGPS();
     toast(`👋 Welkom terug ${S.team}!`);
@@ -431,6 +415,7 @@ function go(testMode){
   S.team=n;S.test=testMode;
   document.getElementById('ht-team').textContent=n;
   if(testMode)document.getElementById('test-bar').classList.add('on');
+  saveSession();
   showScreen('hunt');render();initFB();
   if(!testMode)startGPS();
   else{document.getElementById('gtxt').textContent='Testmodus — geen echte GPS';document.getElementById('gdot').className='gdot srch'}
@@ -438,13 +423,13 @@ function go(testMode){
 
 function exitTest(){S.test=false;document.getElementById('test-bar').classList.remove('on');startGPS();toast('GPS geactiveerd')}
 
-// FIREBASE
 function initFB(){
   if(!CONFIG.firebase.apiKey||CONFIG.firebase.apiKey==='JOUW_API_KEY')return;
   const s=document.createElement('script');s.type='module';
   s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,set,onValue}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);window._fb=(p,v)=>set(ref(db,p),v);onValue(ref(db,'teams'),(snap)=>{window._fbData=snap.val();});`;
   document.head.appendChild(s);
 }
+
 let _lastPush=0;
 function push(force=false){
   if(!window._fb)return;
@@ -465,11 +450,10 @@ function push(force=false){
   })}catch(e){}
 }
 
-// RENDER
 function render(){
   const sc=document.getElementById('hscroll');sc.innerHTML='';
   const st=STOPS[S.idx];if(!st)return;
-  sc.appendChild(mkCompass(st));
+  sc.appendChild(mkRadar(st));
   sc.appendChild(isOpen(st)?mkCard(st):mkLocked(st));
   document.getElementById('prog').style.width=(S.idx/STOPS.length*100)+'%';
   document.getElementById('ht-score').textContent=S.score;
@@ -481,41 +465,34 @@ function isOpen(st){
   return dist(S.pos.lat,S.pos.lng,st.lat,st.lng)<=CONFIG.unlockRadius;
 }
 
-function mkCompass(st){
-  const w=document.createElement('div');w.className='compass-wrap';
+function mkRadar(st){
+  const w=document.createElement('div');w.className='radar-wrap';
   if(!S.pos){
-    w.innerHTML=`<div class="compass-card"><div class="c-dial"><span class="c-arrow">🧭</span></div><div class="c-info"><div class="c-dest">Volgende stop: <strong>${st.emoji} ${st.name}</strong></div><div class="c-dist" style="font-size:1rem;color:var(--mist)">Wacht op GPS…</div></div></div>`;
+    w.innerHTML=`<div class="radar-card state-cold">
+      <div class="radar-blob-wrap"><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">🧭</div></div>
+      <div class="radar-status">GPS zoeken…</div>
+      <div class="radar-hint">Wacht even terwijl je locatie wordt bepaald</div>
+    </div>`;
     return w;
   }
   const d=dist(S.pos.lat,S.pos.lng,st.lat,st.lng);
-  const b=brng(S.pos.lat,S.pos.lng,st.lat,st.lng);
-  const rot=S.heading!=null?(b-S.heading+360)%360:b;
-  const dm=d<1000?Math.round(d)+' m':(d/1000).toFixed(1)+' km';
-  let cls='',tc='',tt='❄️ Nog ver weg';
-  if(d<CONFIG.compassActiveFrom*0.6){cls='warm';tc='warm';tt='🟡 Je komt er dichtbij…'}
-  if(d<CONFIG.unlockRadius){cls='hot';tc='hot';tt='🔥 Je bent er!'}
-  const nameHidden = !isOpen(st);
-  const destLabel = nameHidden ? '🔒 Onbekend — volg de clue' : `${st.emoji} ${st.name}`;
-  // Toon 8-richtingen kompas op basis van bearing (werkt altijd, ook zonder gyroscoop)
-  const arrowColor = cls==='hot' ? '#b84c2b' : cls==='warm' ? '#e0a030' : '#c9922a';
-  w.innerHTML=`<div class="compass-card ${cls}">
-    <div class="c-dial">
-      <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(${b}deg);transition:transform .4s ease" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="18,3 28,30 18,24 8,30" fill="${arrowColor}" opacity="1"/>
-        <polygon points="18,3 8,30 18,24" fill="${arrowColor}" opacity="0.35"/>
-      </svg>
-    </div>
-    <div class="c-info">
-      <div class="c-dest">Volgende stop: <strong>${destLabel}</strong></div>
-      <div class="c-dist">${dm}</div>
-      <div class="c-temp ${tc}">${tt}</div>
-    </div></div>`;
+  const nameHidden=!isOpen(st);
+  const destLabel=nameHidden?'🔒 Onbekend — volg de clue':`${st.emoji} ${st.name}`;
+  let state='cold',icon='❄️',statusTxt='Koud — je bent nog ver weg',hint='Lees de clue goed en zoek de juiste richting';
+  if(d<200){state='warm';icon='🟣';statusTxt='Warm — je komt er dichterbij!';hint='Je gaat de goede kant op, ga door!'}
+  if(d<60){state='hot';icon='🔥';statusTxt='Heet — je bent er vlakbij!';hint='Kijk goed om je heen…'}
+  if(d<=CONFIG.unlockRadius){state='here';icon='✨';statusTxt='HIER! Stop ontgrendeld!';hint=''}
+  w.innerHTML=`<div class="radar-card state-${state}">
+    <div class="radar-blob-wrap"><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
+    <div class="radar-status">${statusTxt}</div>
+    <div class="radar-hint">Volgende stop: <strong style="color:var(--paper)">${destLabel}</strong>${hint?'<br>'+hint:''}</div>
+  </div>`;
   return w;
 }
 
 function mkLocked(st){
   const d=document.createElement('div');d.className='locked-card';
-  d.innerHTML=`<div class="li">🔒</div><h3>Onbekende stop</h3><p>Volg de clue en het kompas.<br>De stop onthult zich als je dichtbij genoeg bent.</p>`;
+  d.innerHTML=`<div class="li">🔒</div><h3>Onbekende stop</h3><p>Volg de clue en de radar.<br>De stop onthult zich als je dichtbij genoeg bent.</p>`;
   return d;
 }
 
@@ -527,8 +504,6 @@ function mkCard(st){
   let bdg=`Stop ${st.id}/${STOPS.length}`;
   if(st.cava)bdg='🥂 Verrassing!';
   if(st.finish)bdg='🏁 Finish';
-
-  // linear flow: weetje → quiz → clue (clue only after quiz answered)
   card.innerHTML=`
     <div class="stop-head">
       <div class="stop-num">${st.id}</div>
@@ -560,14 +535,6 @@ function mkQuiz(st){
   return`<div class="quiz-q">${st.quiz.vraag}</div><div class="quiz-opts">${st.quiz.opties.map((o,i)=>`<button class="qopt" onclick="ans(${st.id},${i})">${o}</button>`).join('')}</div><div class="qfb" id="qf${st.id}"></div>`;
 }
 
-function setTab(id,t,btn){
-  S.tab[id]=t;
-  document.getElementById('c'+id)?.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('c'+id)?.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
-  btn?.classList.add('on');
-  document.getElementById('t'+t[0]+id)?.classList.add('on');
-}
-
 function ans(id,ch){
   if(S.quizDone.has(id))return;
   const st=STOPS.find(s=>s.id===id);
@@ -583,42 +550,20 @@ function ans(id,ch){
   fb.className='qfb '+(ok?'ok':'nok');
   if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`)}
   S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);saveSession();
-  // reveal clue section
   setTimeout(()=>{
     const clueEl=document.getElementById('clue-'+id);
-    if(clueEl){
-      clueEl.style.display='block';
-      clueEl.scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
+    if(clueEl){clueEl.style.display='block';clueEl.scrollIntoView({behavior:'smooth',block:'nearest'})}
   },800);
 }
 
 function addScore(n){S.score+=n;document.getElementById('ht-score').textContent=S.score;saveSession()}
-function saveSession(){
-  try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,quizDone:[...S.quizDone]}))}catch(e){}
-}
-function loadSession(){
-  try{
-    const d=localStorage.getItem('sj_session');
-    if(!d)return false;
-    const p=JSON.parse(d);
-    if(!p.team)return false;
-    S.team=p.team;S.score=p.score||0;S.idx=p.idx||0;S.test=p.test||false;
-    S.quizDone=new Set(p.quizDone||[]);
-    return true;
-  }catch(e){return false}
-}
+function saveSession(){try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,quizDone:[...S.quizDone]}))}catch(e){}}
 function clearSession(){try{localStorage.removeItem('sj_session')}catch(e){}}
 
-// GPS
 function startGPS(){
   document.getElementById('gpill').classList.add('on');
   if(!navigator.geolocation){document.getElementById('gtxt').textContent='GPS niet beschikbaar';return}
   navigator.geolocation.watchPosition(onPos,onErr,{enableHighAccuracy:true,timeout:15000,maximumAge:3000});
-  if(window.DeviceOrientationEvent){
-    window.addEventListener('deviceorientationabsolute',onOri,true);
-    window.addEventListener('deviceorientation',onOri,true);
-  }
 }
 function onPos(p){
   S.pos={lat:p.coords.latitude,lng:p.coords.longitude,sim:false};
@@ -628,9 +573,7 @@ function onPos(p){
   render();push();
 }
 function onErr(){document.getElementById('gdot').className='gdot';document.getElementById('gtxt').textContent='GPS fout — gebruik testmodus'}
-function onOri(e){const h=e.webkitCompassHeading??(e.absolute&&e.alpha!=null?360-e.alpha:null);if(h!=null)S.heading=h}
 
-// SIMULATE
 function simStep(){
   const st=STOPS[S.idx];if(!st){toast('Alle stops gesimuleerd!');return}
   S.pos={lat:st.lat+(Math.random()-.5)*.0002,lng:st.lng+(Math.random()-.5)*.0002,sim:true};
@@ -639,42 +582,22 @@ function simStep(){
   render();toast(`📍 Ontgrendeld: ${st.emoji} ${st.name}`);push();
 }
 
-// FINISH
 async function doFinish(){
   clearSession();
-  // tel hoeveel teams al gefinished zijn via Firebase
-  let pos = 1;
-  try {
-    if(window._fb && window._fbData) {
-      const all = Object.values(window._fbData || {});
-      pos = all.filter(t => t.finished && t.team !== S.team).length + 1;
-    }
-  } catch(e) {}
-  // push als finished
-  S.idx = STOPS.length;
-  push(true);
-  // toon finish scherm
-  document.getElementById('fpts').textContent = S.score;
-  // podium boodschap
-  const medals = ['🥇','🥈','🥉'];
-  const medal = medals[pos-1] || '🎉';
-  const posMsg = pos === 1
-    ? `${medal} Jullie zijn de eersten! Proficiat!`
-    : pos === 2
-    ? `${medal} Tweede plaats! Goed gedaan!`
-    : pos === 3
-    ? `${medal} Derde plaats! Knap!`
-    : `${medal} Plaats ${pos} — goed gepresteerd!`;
-  document.getElementById('fpos').textContent = posMsg;
-  document.getElementById('fmsg').textContent = `${S.team} · ${S.score} punten · Welkom aan de Multatuli! 🥂`;
+  let pos=1;
+  try{if(window._fb&&window._fbData){const all=Object.values(window._fbData||{});pos=all.filter(t=>t.finished&&t.team!==S.team).length+1}}catch(e){}
+  S.idx=STOPS.length;push(true);
+  document.getElementById('fpts').textContent=S.score;
+  const medals=['🥇','🥈','🥉'];
+  const medal=medals[pos-1]||'🎉';
+  const posMsg=pos===1?`${medal} Jullie zijn de eersten! Proficiat!`:pos===2?`${medal} Tweede plaats! Goed gedaan!`:pos===3?`${medal} Derde plaats! Knap!`:`${medal} Plaats ${pos} — goed gepresteerd!`;
+  document.getElementById('fpos').textContent=posMsg;
+  document.getElementById('fmsg').textContent=`${S.team} · ${S.score} punten · Welkom aan de Multatuli! 🥂`;
   showScreen('finish');
 }
 
-// GEO
 function dist(a,b,c,d){const R=6371000,dL=(c-a)*Math.PI/180,dO=(d-b)*Math.PI/180,e=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dO/2)**2;return R*2*Math.atan2(Math.sqrt(e),Math.sqrt(1-e))}
 function brng(a,b,c,d){const dO=(d-b)*Math.PI/180,y=Math.sin(dO)*Math.cos(c*Math.PI/180),x=Math.cos(a*Math.PI/180)*Math.sin(c*Math.PI/180)-Math.sin(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.cos(dO);return(Math.atan2(y,x)*180/Math.PI+360)%360}
-
-// UI
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active')}
 let _tt;
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('on'),3000)}
