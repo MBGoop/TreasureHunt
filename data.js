@@ -64,7 +64,7 @@ const STOPS = [
     id: 3, emoji: "🥩", name: "Groot Vleeshuis",
     lat: 51.05593, lng: 3.72181,
     weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
-    clue: "Je staat voor het gebouw waar alleen 'Prinsenkinderen' vlees mochten verkopen. Scheepjes voeren vroeger ONDER dit gebouw door. Kijk aan de zijkant — tel het aantal bogen. Dat getal = het aantal letters van je volgende stop: een bouwwerk dat ook als katoenfabriek heeft gediend.",
+    clue: "Link naar gravensteen zoeken",
     quiz: {
       vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
       opties: ["De Gildebroeders", "De Prinsenkinderen", "De Koningszonen", "De Ambachtsmeesters"],
