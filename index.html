@@ -367,7 +367,7 @@ document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')go(false)};
     if(block){
       block.style.display='block';
       document.getElementById('resume-team').textContent=p.team;
-      document.getElementById('resume-info').textContent=`Stop ${(p.idx||0)+1}/${STOPS.length} · ${stop.emoji} ${stop.name} · ⭐ ${p.score||0} punten`;
+      document.getElementById('resume-info').textContent=`Stop ${(p.idx||0)+1}/${STOPS.length} · ⭐ ${p.score||0} punten`;
     }
   }catch(e){}
 })();
@@ -405,7 +405,7 @@ function nextStop(){
   render();
   document.getElementById('hscroll').scrollTo(0,0);
   const nx=STOPS[S.idx];
-  if(nx)toast(`➡️ ${nx.emoji} ${nx.name}`);
+  if(nx)toast(`➡️ Stop ${S.idx+1} van ${STOPS.length} ontgrendeld!`);
 }
 
 function go(testMode){
