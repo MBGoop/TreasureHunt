@@ -84,10 +84,11 @@ html,body{min-height:100%;font-family:sans-serif;background:var(--ink);color:var
 
 <div id="dash">
   <div class="dhdr">
-    <h1>🗺️ Schattenjacht — Admin</h1>
+    <h1> Ruwe versie - opvolging — Admin</h1>
     <div class="dhdr-r">
       <span class="ts" id="ts"></span>
       <button class="ref-btn" onclick="load()">↻ Vernieuwen</button>
+      <button class="ref-btn" style="background:#4a1a0a;color:#f08040;border:1px solid #8a3010" onclick="resetAll()">🗑️ Reset teams</button>
     </div>
   </div>
   <div class="dbody">
@@ -201,6 +202,21 @@ function render(){
 }
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+async function resetAll(){
+  if(!confirm('Alle teams verwijderen uit Firebase?\nDit kan niet ongedaan gemaakt worden.'))return;
+  try{
+    const s=document.createElement('script');s.type='module';
+    s.textContent=`import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';import{getDatabase,ref,remove}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const app=initializeApp(${JSON.stringify(CONFIG.firebase)});const db=getDatabase(app);remove(ref(db,'teams')).then(()=>{window._fbData={};window._resetDone=true;});`;
+    document.head.appendChild(s);
+    setTimeout(()=>{
+      if(window._resetDone){
+        teams={};render();
+        document.getElementById('ts').textContent='✅ Reset gedaan om '+new Date().toLocaleTimeString('nl-BE');
+      }
+    },1500);
+  }catch(e){alert('Reset mislukt: '+e.message)}
+}
 </script>
 </body>
 </html>

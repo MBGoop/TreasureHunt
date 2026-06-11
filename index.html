@@ -308,6 +308,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <input class="field-inp" id="inp" type="text" placeholder="bv. Team Gravensteen" maxlength="24" autocomplete="off">
     </div>
     <button class="btn-start" onclick="go(false)">Start de jacht &rarr;</button>
+    <div style="text-align:center;margin-top:.5rem"><a href="?admin" style="font-size:.68rem;color:var(--mist);text-decoration:none;font-family:sans-serif;letter-spacing:.05em">⚙️ Admin</a></div>
   </div>
 </div>
 
@@ -319,7 +320,22 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
         <div class="lbl">Team</div>
         <div class="team" id="ht-team">—</div>
       </div>
-      <div class="score-chip">⭐ <span id="ht-score">0</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <button onclick="toggleScoreboard()" style="background:var(--ink2);border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:.28rem .7rem;font-size:.75rem;cursor:pointer;font-family:sans-serif">🏆</button>
+        <div class="score-chip">⭐ <span id="ht-score">0</span></div>
+      </div>
+    </div>
+    <!-- SCOREBORD OVERLAY -->
+    <div id="scoreboard-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;padding:1.5rem;overflow-y:auto">
+      <div style="max-width:400px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+          <div style="font-size:1.2rem;font-weight:700;color:var(--gold)">🏆 Scorebord</div>
+          <button onclick="toggleScoreboard()" style="background:var(--ink2);border:1px solid #444;color:var(--mist);border-radius:99px;padding:.3rem .8rem;font-size:.8rem;cursor:pointer">✕ Sluiten</button>
+        </div>
+        <div id="scoreboard-list" style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="color:var(--mist);font-size:.85rem;text-align:center;font-style:italic">Scorebord laden…</div>
+        </div>
+      </div>
     </div>
     <div class="test-bar" id="test-bar">
       <div class="test-bar-lbl">🧪 Testmodus actief</div>
@@ -327,6 +343,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <button class="btn-exit" onclick="exitTest()">✕ Echt GPS</button>
     </div>
     <div class="prog-rail"><div class="prog-fill" id="prog"></div></div>
+    <div id="offline-bar" style="display:none;background:#8a3010;padding:.4rem 1rem;font-size:.72rem;color:white;font-family:sans-serif;align-items:center;gap:.5rem">⚠️ Geen internet — je voortgang wordt lokaal bewaard</div>
   </div>
   <div class="hunt-scroll" id="hscroll"></div>
 </div>
@@ -548,7 +565,7 @@ function ans(id,ch){
   if(!ok)btns[st.quiz.correct].classList.add('ok');
   fb.textContent=ok?`🎉 Correct! +${CONFIG.pointsQuiz} punten`:'✗ Jammer — geen punten';
   fb.className='qfb '+(ok?'ok':'nok');
-  if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`)}
+  if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`);if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);}
   S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);saveSession();
   setTimeout(()=>{
     const clueEl=document.getElementById('clue-'+id);
@@ -565,12 +582,20 @@ function startGPS(){
   if(!navigator.geolocation){document.getElementById('gtxt').textContent='GPS niet beschikbaar';return}
   navigator.geolocation.watchPosition(onPos,onErr,{enableHighAccuracy:true,timeout:15000,maximumAge:3000});
 }
+window.addEventListener('online',()=>{
+  document.getElementById('offline-bar').style.display='none';
+  toast('✅ Terug online!');
+});
+window.addEventListener('offline',()=>{
+  document.getElementById('offline-bar').style.display='flex';
+  toast('⚠️ Geen internet — voortgang lokaal bewaard');
+});
 function onPos(p){
   S.pos={lat:p.coords.latitude,lng:p.coords.longitude,sim:false};
   const ac=Math.round(p.coords.accuracy);
   document.getElementById('gdot').className='gdot on';
   document.getElementById('gtxt').textContent=`GPS ±${ac}m`;
-  render();push();
+  render();push();if(isOpen(STOPS[S.idx])&&!S._lastUnlocked){S._lastUnlocked=S.idx;if(navigator.vibrate)navigator.vibrate([50,30,50]);}
 }
 function onErr(){document.getElementById('gdot').className='gdot';document.getElementById('gtxt').textContent='GPS fout — gebruik testmodus'}
 
@@ -579,7 +604,7 @@ function simStep(){
   S.pos={lat:st.lat+(Math.random()-.5)*.0002,lng:st.lng+(Math.random()-.5)*.0002,sim:true};
   document.getElementById('gdot').className='gdot on';
   document.getElementById('gtxt').textContent=`🧪 ${st.name}`;
-  render();toast(`📍 Ontgrendeld: ${st.emoji} ${st.name}`);push();
+  render();toast(`📍 Ontgrendeld: ${st.emoji} ${st.name}`);push();if(navigator.vibrate)navigator.vibrate([50,30,50]);
 }
 
 async function doFinish(){
@@ -599,6 +624,43 @@ async function doFinish(){
 function dist(a,b,c,d){const R=6371000,dL=(c-a)*Math.PI/180,dO=(d-b)*Math.PI/180,e=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dO/2)**2;return R*2*Math.atan2(Math.sqrt(e),Math.sqrt(1-e))}
 function brng(a,b,c,d){const dO=(d-b)*Math.PI/180,y=Math.sin(dO)*Math.cos(c*Math.PI/180),x=Math.cos(a*Math.PI/180)*Math.sin(c*Math.PI/180)-Math.sin(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.cos(dO);return(Math.atan2(y,x)*180/Math.PI+360)%360}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-'+id).classList.add('active')}
+
+function toggleScoreboard(){
+  const overlay=document.getElementById('scoreboard-overlay');
+  const isOpen=overlay.style.display!=='none';
+  if(isOpen){overlay.style.display='none';return}
+  overlay.style.display='block';
+  renderScoreboard();
+}
+
+function renderScoreboard(){
+  const list=document.getElementById('scoreboard-list');
+  if(!window._fbData){
+    list.innerHTML='<div style="color:var(--mist);font-size:.85rem;text-align:center;font-style:italic">Geen scores beschikbaar</div>';
+    return;
+  }
+  const teams=Object.values(window._fbData).sort((a,b)=>(b.score||0)-(a.score||0));
+  const medals=['🥇','🥈','🥉'];
+  list.innerHTML=teams.map((t,i)=>{
+    const isMe=t.team===S.team;
+    const medal=medals[i]||`${i+1}.`;
+    return`<div style="background:${isMe?'rgba(126,87,197,.2)':'rgba(255,255,255,.05)'};border:1px solid ${isMe?'var(--gold)':'#333'};border-radius:12px;padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem">
+      <span style="font-size:1.1rem;min-width:28px">${medal}</span>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:.9rem;color:${isMe?'var(--gold)':'var(--paper)'}">${esc(t.team)}${isMe?' (jij)':''}</div>
+        <div style="font-size:.72rem;color:var(--mist);margin-top:.15rem">${t.stopName||'—'}${t.finished?' · ✓ Finish':''}</div>
+      </div>
+      <div style="font-weight:700;color:var(--gold);font-size:.95rem">⭐ ${t.score||0}</div>
+    </div>`;
+  }).join('');
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// Admin link via ?admin
+if(window.location.search.includes('admin')){
+  window.location.href='admin.html';
+}
 let _tt;
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('on'),3000)}
 </script>
