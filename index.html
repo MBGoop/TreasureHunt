@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1a18">
-<title>Wandeling IP Gent</title>
+<title>Schattenjacht Gent</title>
 <style>
 :root{
   --ink:#151214;--ink2:#1e1a22;--ink3:#272230;
@@ -91,8 +91,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .btn-sim{background:var(--gold);color:#1a1200;border:none;border-radius:var(--rs);padding:.45rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .btn-sim:active{opacity:.8}
 .btn-exit{background:transparent;border:1px solid #4a4640;color:var(--mist);border-radius:var(--rs);padding:.4rem .7rem;font-size:.7rem;cursor:pointer}
-.prog-rail{height:3px;background:#2a2620}
-.prog-fill{height:100%;background:var(--gold);transition:width .5s ease;border-radius:0 99px 99px 0}
+.prog-dots{display:flex;gap:.45rem;justify-content:center;padding:.5rem 1rem .65rem;flex-wrap:wrap}
+.pdot{width:14px;height:14px;border-radius:50%;background:#2e2838;border:1.5px solid #3d3550;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#1a1200;transition:all .3s ease}
+.pdot.done{background:var(--gold);border-color:var(--gold)}
+.pdot.cur{border-color:var(--gold);background:#2e2838;animation:dotpulse 1.5s infinite}
+@keyframes dotpulse{0%,100%{box-shadow:0 0 0 0 rgba(126,87,197,.5)}50%{box-shadow:0 0 0 5px rgba(126,87,197,0)}}
 .hunt-scroll{flex:1;overflow-y:auto;padding-bottom:1.5rem}
 
 /* RADAR */
@@ -108,6 +111,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .radar-ring:nth-child(3){animation-delay:1.2s}
 @keyframes radarping{0%{transform:scale(.3);opacity:.6}100%{transform:scale(1.5);opacity:0}}
 .radar-blob{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;z-index:1;transition:background .5s ease}
+.radar-sweep{position:absolute;width:80px;height:80px;border-radius:50%;background:conic-gradient(from 0deg,rgba(126,87,197,.45),transparent 70deg);animation:sweep 2.4s linear infinite;z-index:0}
+@keyframes sweep{to{transform:rotate(360deg)}}
 .radar-status{font-size:.85rem;font-weight:600;letter-spacing:.02em;text-align:center}
 .radar-hint{font-size:.72rem;color:var(--mist);text-align:center;line-height:1.5}
 .state-cold .radar-ring{background:#3a6ea8}
@@ -141,7 +146,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   width:36px;height:36px;border-radius:12px;flex-shrink:0;
   background:var(--gold);color:#1a1200;
   display:flex;align-items:center;justify-content:center;
-  font-size:.82rem;font-weight:700;
+  font-size:1.15rem;font-weight:700;
 }
 .cava .stop-num{background:var(--pink);color:white}
 .fin .stop-num{background:var(--moss);color:white}
@@ -213,6 +218,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .gdot.on{background:#4caf50;animation:bl 2s infinite}
 .gdot.srch{background:var(--gold);animation:bl .8s infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;width:9px;height:9px;top:-12px;z-index:300;pointer-events:none;animation:cfall 2.2s ease-in forwards}
+@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(680deg);opacity:.15}}
 
 /* TOAST */
 .toast{position:fixed;top:1.25rem;left:50%;transform:translateX(-50%) translateY(-130%);background:var(--ink2);color:var(--paper);border:1.5px solid var(--gold);border-radius:99px;padding:.65rem 1.5rem;font-size:.83rem;white-space:nowrap;transition:transform .35s cubic-bezier(.34,1.56,.64,1);z-index:200;max-width:90vw;text-align:center;font-weight:600}
@@ -342,7 +351,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <button class="btn-sim" onclick="simStep()">📍 Simuleer stop</button>
       <button class="btn-exit" onclick="exitTest()">✕ Echt GPS</button>
     </div>
-    <div class="prog-rail"><div class="prog-fill" id="prog"></div></div>
+    <div class="prog-dots" id="prog-dots"></div>
     <div id="offline-bar" style="display:none;background:#8a3010;padding:.4rem 1rem;font-size:.72rem;color:white;font-family:sans-serif;align-items:center;gap:.5rem">⚠️ Geen internet — je voortgang wordt lokaal bewaard</div>
   </div>
   <div class="hunt-scroll" id="hscroll"></div>
@@ -358,6 +367,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     <div class="fin-lbl">punten gescoord</div>
   </div>
   <p id="fmsg">Welkom aan de Multatuli!</p>
+  <div id="share-card" style="background:var(--ink2);border:1.5px solid var(--gold);border-radius:20px;padding:1.25rem 1.5rem;margin:1.25rem auto 0;max-width:300px;text-align:center">
+    <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mist);font-weight:600;margin-bottom:.4rem">🗺️ Overleef de Teamnamiddag</div>
+    <div id="sc-team" style="font-size:1.25rem;font-weight:700;color:var(--paper)">—</div>
+    <div id="sc-detail" style="font-size:.85rem;color:var(--gold);font-weight:600;margin-top:.3rem">—</div>
+    <div id="sc-date" style="font-size:.7rem;color:var(--mist);margin-top:.5rem">—</div>
+  </div>
+  <button onclick="shareResult()" style="margin-top:1rem;background:var(--gold);color:#1a1200;border:none;border-radius:16px;padding:.8rem 1.75rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit">📤 Deel jullie resultaat</button>
+  <p style="font-size:.68rem;color:var(--mist);margin-top:.6rem">of maak een screenshot voor de groepschat 📸</p>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -365,7 +382,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 <script src="data.js"></script>
 <script>
-const S={team:'',score:0,pos:null,heading:null,idx:0,quizDone:new Set(),tab:{},test:false};
+const S={team:'',score:0,pos:null,heading:null,idx:0,quizDone:new Set(),tab:{},test:false,streak:0,_celebrated:new Set()};
 
 // boot
 document.getElementById('h1').innerHTML=CONFIG.title;
@@ -404,6 +421,7 @@ function resumeSession(){
     if(!d)return;
     const p=JSON.parse(d);
     S.team=p.team;S.score=p.score||0;S.idx=p.idx||0;S.test=p.test||false;
+    S.streak=p.streak||0;
     S.quizDone=new Set(p.quizDone||[]);
     document.getElementById('ht-team').textContent=S.team;
     document.getElementById('ht-score').textContent=S.score;
@@ -471,9 +489,36 @@ function render(){
   const sc=document.getElementById('hscroll');sc.innerHTML='';
   const st=STOPS[S.idx];if(!st)return;
   sc.appendChild(mkRadar(st));
-  sc.appendChild(isOpen(st)?mkCard(st):mkLocked(st));
-  document.getElementById('prog').style.width=(S.idx/STOPS.length*100)+'%';
+  const open=isOpen(st);
+  if(open&&!S._celebrated.has(st.id)){S._celebrated.add(st.id);confetti();}
+  sc.appendChild(open?mkCard(st):mkLocked(st));
+  renderDots();
   document.getElementById('ht-score').textContent=S.score;
+}
+
+function renderDots(){
+  const wrap=document.getElementById('prog-dots');
+  if(!wrap)return;
+  wrap.innerHTML=STOPS.map((st,i)=>{
+    const done=i<S.idx||S.quizDone.has(st.id);
+    const cur=i===S.idx&&!done;
+    return`<div class="pdot${done?' done':cur?' cur':''}">${done?'✓':''}</div>`;
+  }).join('');
+}
+
+function confetti(){
+  const colors=['#7e57c5','#d4c9f5','#b85c96','#f0b030','#6abf5e'];
+  for(let i=0;i<26;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=(Math.random()*100)+'vw';
+    p.style.background=colors[i%colors.length];
+    p.style.animationDelay=(Math.random()*.4)+'s';
+    p.style.animationDuration=(1.8+Math.random()*1.2)+'s';
+    if(i%3===0)p.style.borderRadius='50%';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),3200);
+  }
 }
 
 function isOpen(st){
@@ -486,7 +531,7 @@ function mkRadar(st){
   const w=document.createElement('div');w.className='radar-wrap';
   if(!S.pos){
     w.innerHTML=`<div class="radar-card state-cold">
-      <div class="radar-blob-wrap"><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">🧭</div></div>
+      <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">🧭</div></div>
       <div class="radar-status">GPS zoeken…</div>
       <div class="radar-hint">Wacht even terwijl je locatie wordt bepaald</div>
     </div>`;
@@ -500,7 +545,7 @@ function mkRadar(st){
   if(d<60){state='hot';icon='🔥';statusTxt='Heet — je bent er vlakbij!';hint='Kijk goed om je heen…'}
   if(d<=CONFIG.unlockRadius){state='here';icon='✨';statusTxt='HIER! Stop ontgrendeld!';hint=''}
   w.innerHTML=`<div class="radar-card state-${state}">
-    <div class="radar-blob-wrap"><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
+    <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
     <div class="radar-status">${statusTxt}</div>
     <div class="radar-hint">Volgende stop: <strong style="color:var(--paper)">${destLabel}</strong>${hint?'<br>'+hint:''}</div>
   </div>`;
@@ -523,8 +568,8 @@ function mkCard(st){
   if(st.finish)bdg='🏁 Finish';
   card.innerHTML=`
     <div class="stop-head">
-      <div class="stop-num">${st.id}</div>
-      <div class="stop-title">${st.emoji} ${st.name}</div>
+      <div class="stop-num">${st.emoji}</div>
+      <div class="stop-title">${st.name}</div>
       <div class="stop-badge">${bdg}</div>
     </div>
     <div class="stop-flow">
@@ -563,9 +608,21 @@ function ans(id,ch){
   const ok=ch===st.quiz.correct;
   btns[ch].classList.add(ok?'ok':'nok');
   if(!ok)btns[st.quiz.correct].classList.add('ok');
-  fb.textContent=ok?`🎉 Correct! +${CONFIG.pointsQuiz} punten`:'✗ Jammer — geen punten';
-  fb.className='qfb '+(ok?'ok':'nok');
-  if(ok){addScore(CONFIG.pointsQuiz);toast(`🎉 Juist! +${CONFIG.pointsQuiz} punten`);if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);}
+  const FOUT=['Amai, da was er nevens!','Oei oei, just nie!','De Dulle Griet had het geweten…','Da was nen oorveeg waard 😅','Allee, volgende keer beter zeker!'];
+  if(ok){
+    S.streak++;
+    let extra='';
+    if(S.streak>0&&S.streak%3===0){addScore(1);extra=` 🔥 ${S.streak} op rij — bonuspunt!`}
+    fb.textContent=`🎉 Correct! +${CONFIG.pointsQuiz} punten${extra}`;
+    fb.className='qfb ok';
+    addScore(CONFIG.pointsQuiz);
+    toast(extra?`🔥 Op dreef! +${CONFIG.pointsQuiz+1} punten`:`🎉 Juist! +${CONFIG.pointsQuiz} punten`);
+    if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);
+  }else{
+    S.streak=0;
+    fb.textContent=`✗ ${FOUT[Math.floor(Math.random()*FOUT.length)]} — geen punten deze keer`;
+    fb.className='qfb nok';
+  }
   S.quizDone.add(id);addScore(CONFIG.pointsStop);push(true);saveSession();
   setTimeout(()=>{
     const clueEl=document.getElementById('clue-'+id);
@@ -574,7 +631,7 @@ function ans(id,ch){
 }
 
 function addScore(n){S.score+=n;document.getElementById('ht-score').textContent=S.score;saveSession()}
-function saveSession(){try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,quizDone:[...S.quizDone]}))}catch(e){}}
+function saveSession(){try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,streak:S.streak,quizDone:[...S.quizDone]}))}catch(e){}}
 function clearSession(){try{localStorage.removeItem('sj_session')}catch(e){}}
 
 function startGPS(){
@@ -617,7 +674,11 @@ async function doFinish(){
   const medal=medals[pos-1]||'🎉';
   const posMsg=pos===1?`${medal} Jullie zijn de eersten! Proficiat!`:pos===2?`${medal} Tweede plaats! Goed gedaan!`:pos===3?`${medal} Derde plaats! Knap!`:`${medal} Plaats ${pos} — goed gepresteerd!`;
   document.getElementById('fpos').textContent=posMsg;
-  document.getElementById('fmsg').textContent=`${S.team} · ${S.score} punten · Welkom aan de Multatuli! 🥂`;
+  document.getElementById('fmsg').textContent=`Welkom aan de Multatuli! 🥂`;
+  document.getElementById('sc-team').textContent=S.team;
+  document.getElementById('sc-detail').textContent=`⭐ ${S.score} punten · ${medal} plaats ${pos}`;
+  document.getElementById('sc-date').textContent=CONFIG.date;
+  S._finishPos=pos;
   showScreen('finish');
 }
 
@@ -656,6 +717,15 @@ function renderScoreboard(){
 }
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+async function shareResult(){
+  const txt=`🗺️ Overleef de Teamnamiddag — ${S.team}\n⭐ ${S.score} punten · plaats ${S._finishPos||'?'}\n${CONFIG.date} · Gent`;
+  if(navigator.share){
+    try{await navigator.share({text:txt})}catch(e){}
+  }else{
+    try{await navigator.clipboard.writeText(txt);toast('📋 Gekopieerd — plak in de groepschat!')}catch(e){toast('Maak gewoon een screenshot 📸')}
+  }
+}
 
 // Admin link via ?admin
 if(window.location.search.includes('admin')){
