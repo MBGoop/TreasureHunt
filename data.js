@@ -51,10 +51,10 @@ const STOPS = [
   {
     id: 2, emoji: "🌉", name: "Sint-Michielsbrug",
     lat: 51.05388, lng: 3.72054,
-    weetje: "De Sint-Michielsbrug in Gent werd gebouwd tussen 1905 en 1909 en werd ontworpen door Louis Cloquet. Ze verving een houten draaibrug uit 1754 en is vandaag een van de bekendste kijkpunten over de historische binnenstad.",
-    clue: "Volg het water naar de plek waar de markt begint...",
+    weetje: "De Sint-Michielsbrug is veel meer dan een oversteekplaats. De vroegste vermelding gaat terug tot 1322 — toen stond er al een brug op deze plek. Eeuwenlang was dat een houten draaibrug, maar die veroorzaakte zoveel vertraging voor de tram dat de stad besloot iets permanents te bouwen, met de Wereldtentoonstelling van 1913 als deadline. De huidige stenen boogbrug werd gebouwd tussen 1905 en 1909, ontworpen door architect Louis Cloquet — dezelfde man die ook het Oude Postkantoor op de Korenmarkt en het Sint-Pietersstation ontwierp. Op de centrale lantaarn staat een bronzen beeld van Sint-Michael de Aartsengel. Niet toevallig opende de eerste Ford-showroom van Gent in de jaren twintig vlak naast de brug. Sinds 1983 is de brug een beschermd monument.",
+    clue: "Volg nu terug het water naar de plek waar de markt begint...",
     quiz: {
-      vraag: "Welk dier staat bovenop het Belfort van Gent?",
+      vraag: "Welk dier ligt er aan de voeten bij Sint-Michael en staat staat natuurlijk op het Belfort van Gent?",
       opties: ["Een leeuw", "Een adelaar", "Een draak", "Een griffioen"],
       correct: 2  // "Een draak"
     }
@@ -63,7 +63,7 @@ const STOPS = [
     id: 3, emoji: "🥩", name: "Groot Vleeshuis",
     lat: 51.05593, lng: 3.72181,
     weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
-    clue: "Link naar gravensteen zoeken",
+    clue: "Je verlaat het gebouw waar het vlees werd verkocht. Maar naast die handel stond al eeuwenlang een klein kroegje met een veelzeggende naam — een naam die verwijst naar waar de veroordeelden eindigden. Diezelfde veroordeelden werden berecht in het gebouw dat je nu zoekt. Zoek de plek waar recht werd gesproken, gevangenen werden vastgehouden én waar de veroordeelden hun laatste ale dronken...",
     quiz: {
       vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
       opties: ["De Gildebroeders", "De Prinsenkinderen", "De Koningszonen", "De Ambachtsmeesters"],
@@ -73,7 +73,7 @@ const STOPS = [
   {
     id: 4, emoji: "🏰", name: "Gravensteen",
     lat: 51.05718, lng: 3.72072,
-    weetje: "Het Gravensteen was burcht, gevangenis, folterplaats, rechtbank én ... Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
+    weetje: "Het Gravensteen was burcht, gevangenis, folterplaats, rechtbank, muntdrukkerij én ... Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
     clue: "Naast dit kasteel staat een kapel waar in 1337 bloed vloeide tussen twee families. Als boetedoening voor die moordpartij moesten ze een godshuis bouwen. Zoek dat gebouw.",
     quiz: {
       vraag: "Wat was het gravensteen ook al eens, naast burcht en gevangenis?",
@@ -88,8 +88,8 @@ const STOPS = [
     clue: "Vervolg je weg naar de volgende wijk waar straatnamen de oude ambachten verraden. Zoek de straat dat de maken heeft met een spaanse stad",
     quiz: {
       vraag: "Waarom werd het Huis van Alijn gebouwd in 1363?",
-      opties: ["Als woonst voor de burgemeester", "Als boetedoening na een bloedige bruiloftsvete", "Als opslagplaats voor wijn", "Als zetel van het schippersgilde"],
-      correct: 1  // "Als boetedoening na een bloedige bruiloftsvete"
+      opties: ["Als woonst voor de burgemeester", "Als boetedoening na een bloedige liefdesvete", "Als opslagplaats voor wijn", "Als zetel van het schippersgilde"],
+      correct: 1  // "Als boetedoening na een bloedige liefdesvete"
     }
   },
   {
