@@ -74,7 +74,7 @@ const STOPS = [
     id: 4, emoji: "🏰", name: "Gravensteen",
     lat: 51.05718, lng: 3.72072,
     weetje: "Het Gravensteen was burcht, gevangenis, folterplaats, rechtbank, muntdrukkerij én ... Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
-    clue: "Naast dit kasteel staat een kapel waar in 1337 bloed vloeide tussen twee families. Als boetedoening voor die moordpartij moesten ze een godshuis bouwen. Zoek dat gebouw.",
+    clue: "In 1337 vloeide bloed tussen twee families in de Sint-Janskerk. Als boetedoening voor die moordpartij moesten ze een godshuis bouwen. Zoek dat gebouw...",
     quiz: {
       vraag: "Wat was het gravensteen ook al eens, naast burcht en gevangenis?",
       opties: ["Een klooster", "Een brouwerij", "Een graanopslagplaats", "Een katoenfabriek"],
@@ -84,12 +84,12 @@ const STOPS = [
   {
     id: 5, emoji: "🦅", name: "Het huis van Alijn",
     lat: 51.05695, lng: 3.72263,
-    weetje: "Dit is het enige volledig bewaarde godshuis van Gent. Ooit bood het gratis onderdak aan armen, zieken en weduwen in kleine witgekalkte huisjes rond een binnentuin. Vandaag vertelt het museum hier het verhaal van het dagelijkse leven in de 20e eeuw — van keukengerief tot kinderspeelgoed.",
+    weetje: "De oorsprong van het Huis van Alijn is een liefdesverhaal met een bloedige afloop. De jonge volder Hendrik Alijn was verliefd op Godelieve, de dochter van een rijke wever. Haar vader weigerde het huwelijk — hij verkoos de rijke patriciër Simon Rijm als huwelijkspartner. Godelieve weigerde op de avances van Simon in te gaan. Gekwetst door haar afwijzing en opgehitst door de volders zon Simon op wraak. Vergezeld van zijn broer en enkele bendeleden drong hij de Sint-Janskerk binnen — vandaag de Sint-Baafskathedraal — en vermoordde er tijdens een kerkdienst zijn rivaal Hendrik Alijn, zijn broer Seger én een dienaar. Als straf en boetedoening moest de familie Rijm een godshuis stichten voor de armen. Dat werd het Huis van Alijn in 1363. Boven de ingangspoort lees je nog altijd: 'Kindren Halyns Hospital anno 1363'. Het is het enige volledig bewaarde godshuis van Gent — een complex met witgekalkte huisjes rond een binnentuin en een eigen kapel. Het bood gratis onderdak, verzorging en ondersteuning aan behoeftige ouderen, zieken en weduwen. Eeuwen later verloor het gebouw zijn functie als armenhuis. In 1932 kocht de stad Gent het vervallen godshuis op en restaureerde het. In 1962 opende het als Museum voor Volkskunde — met een focus op oude ambachten en folklore. Vanaf 2000 draagt het de historische naam Huis van Alijn terug en verschoof de focus naar het dagelijkse leven in de 20e en 21e eeuw — van keukengerief tot kinderspeelgoed, van mode tot muziek.",
     clue: "Vervolg je weg naar de volgende wijk waar straatnamen de oude ambachten verraden. Zoek de straat dat de maken heeft met een spaanse stad",
     quiz: {
-      vraag: "Waarom werd het Huis van Alijn gebouwd in 1363?",
-      opties: ["Als woonst voor de burgemeester", "Als boetedoening na een bloedige liefdesvete", "Als opslagplaats voor wijn", "Als zetel van het schippersgilde"],
-      correct: 1  // "Als boetedoening na een bloedige liefdesvete"
+      vraag: "Wat staat er gegraveerd boven de ingangspoort van het Huis van Alijn?",
+      opties: ["In Nomine Pacis — pro animabus Henrici et Segeri", "Kindren Halyns Hospital anno 1363", "Poenitentia et Redemptio — gesticht by Simon Rijm anno 1363", "Hic Requiescunt Henricus et Segeirus Alijn — MCCCLXIII"],
+      correct: 1  // "Kindren Halyns Hospital anno 1363"
     }
   },
   {
