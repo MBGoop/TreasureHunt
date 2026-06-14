@@ -40,19 +40,19 @@ const STOPS = [
   {
     id: 1, emoji: "⚓", name: "Graslei",
     lat: 51.05477, lng: 3.72075,
-    weetje: "De Graslei was de economische hartader van Gent. De gildehuizen dateren van de 12e tot 17e eeuw — elk was eigendom van een ander gilde. Aan de overkant op de Korenlei staat het huis 'De Zwane' met twee zwanen op de gevel die met de RUG naar elkaar staan — een teken van onenigheid tussen de schippers die er vroeger handelden.",
-    clue: "Hier stond vroeger ergens een houten draaibrug uit 1754. Maar welke is het? Ga ernaartoe… ",
+    weetje: "De Graslei en de Korenlei vormen samen een van de bekendste stadsgezichten van Gent. In de middeleeuwen lag hier de belangrijkste binnenhaven: schepen losten hun lading aan de kades. De Graslei was de drukke handelszone, met goederen als graan, wol en wijn. De gevelrij van gilde- en handelshuizen toont in één straat verschillende bouwstijlen en werd later zorgvuldig gerestaureerd. De Korenlei was eerder residentieel en verwijst naar de graanhandel. Hier staat ‘De Zwane’, herkenbaar aan de twee zwanen op de gevel: een oud uithangteken dat duidelijk maakte welke herberg of zaak het was. Of niet…",
+    clue: "In 1754 stond hier een houten draaibrug — schippers konden hem opzij draaien zodat masten konden passeren. De brug was een scharnierpunt tussen de Graslei (graan- en grasvrachten) en de Korenlei, richting het handelskwartier. Maar welke is het? Ga ernaartoe… ",
     quiz: {
-      vraag: "Waarom staan de zwanen op 'De Zwane' met de RUG naar elkaar?",
+      vraag: "Waarom staan de zwanen op 'De Zwane' nu met de RUG naar elkaar?",
       opties: ["Twee rivaliserende schippersfamilies", "De ene symboliseert vrouwen, de ander alcohol", "De architect vond het mooier in perfecte symmetrie.", "De stenhouwer maakte een fout"],
-      correct: 1  // "Twee rivaliserende schippersfamilies"
+      correct: 1  // "De ene symboliseert vrouwen, de ander alcohol"
     }
   },
   {
     id: 2, emoji: "🌉", name: "Sint-Michielsbrug",
     lat: 51.05388, lng: 3.72054,
-    weetje: "De Sint-Michielsbrug is veel meer dan een oversteekplaats. De vroegste vermelding gaat terug tot 1322 — toen stond er al een brug op deze plek. Eeuwenlang was dat een houten draaibrug, maar die veroorzaakte zoveel vertraging voor de tram dat de stad besloot iets permanents te bouwen, met de Wereldtentoonstelling van 1913 als deadline. De huidige stenen boogbrug werd gebouwd tussen 1905 en 1909, ontworpen door architect Louis Cloquet — dezelfde man die ook het Oude Postkantoor op de Korenmarkt en het Sint-Pietersstation ontwierp. Op de centrale lantaarn staat een bronzen beeld van Sint-Michael de Aartsengel. Niet toevallig opende de eerste Ford-showroom van Gent in de jaren twintig vlak naast de brug. Sinds 1983 is de brug een beschermd monument.",
-    clue: "Volg nu terug het water naar de plek waar de markt begint...",
+    weetje: "De vroegste vermelding van een brug op deze plek dateert al van 1322 — "up Sente Mechiels bricge". In 1754 werd een houten draaibrug gebouwd, die een stenen brug uit 1401 verving. Die draaibrug was onmisbaar voor de binnenvaart: schippers konden hem opzijdraaien zodat masten konden passeren. Maar het voortdurende oponthoud aan de draaibrug, zeker voor de tram, deed het stadsbestuur besluiten een vaste stenen brug te plaatsen — met het oog op de wereldtentoonstelling van 1913. De huidige Sint-Michielsbrug was afgewerkt in 1909, ontworpen door architect Louis Cloquet — dezelfde man die ook het Oude Postkantoor op de Korenmarkt en het Sint-Pietersstation ontwierp. Op de centrale lantaarn staat een bronzen beeld van Sint-Michael de Aartsengel. Sinds 1983 is de brug een beschermd monument.",
+    clue: "Volg het water terug stroomopwaarts, tot je de geluiden van de markt hoort. Zoek het gebouw waar vroeger werd verhandeld door Van Loo, Minne, Van Melle en Deynoodt.",
     quiz: {
       vraag: "Welk dier ligt er aan de voeten bij Sint-Michael en staat staat natuurlijk op het Belfort van Gent?",
       opties: ["Een leeuw", "Een adelaar", "Een draak", "Een griffioen"],
@@ -62,7 +62,7 @@ const STOPS = [
   {
     id: 3, emoji: "🥩", name: "Groot Vleeshuis",
     lat: 51.05593, lng: 3.72181,
-    weetje: "Het Groot Vleeshuis dateert uit 1407. Alleen afstammelingen van vier families (Van Loo, Minne, Van Melle en Deynoodt) mochten er vlees verkopen — een privilege van Karel V. Vroeger voeren scheepjes ONDER het gebouw door via een kanaal.",
+    weetje: "Het Groot Vleeshuis dateert uit 1407 en was eeuwenlang het kloppende hart van de Gentse vleeshandel. Maar niet iedereen mocht hier zomaar aan de slag: dankzij een privilege van Karel V uit 1541 was de handel strikt voorbehouden aan afstammelingen van slechts vier families — Van Loo, Minne, Van Melle en Deynoodt. Wie niet tot één van deze geslachten behoorde, had hier niets te zoeken. Dit monopolie bleef in stand tot het einde van het Ancien Régime. Wat de meeste bezoekers niet weten: onder het gebouw liep vroeger een kanaal. Kleine scheepjes voeren er onderdoor om goederen rechtstreeks aan te voeren. Van dat water is vandaag niets meer te zien, maar de structuur van het gebouw verraadt nog steeds dat Gent ooit veel meer een waterstad was dan het nu lijkt",
     clue: "Je verlaat het gebouw waar het vlees werd verkocht. Maar naast die handel stond al eeuwenlang een klein kroegje met een veelzeggende naam — een naam die verwijst naar waar de veroordeelden eindigden. Diezelfde veroordeelden werden berecht in het gebouw dat je nu zoekt. Zoek de plek waar recht werd gesproken, gevangenen werden vastgehouden én waar de veroordeelden hun laatste ale dronken...",
     quiz: {
       vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
