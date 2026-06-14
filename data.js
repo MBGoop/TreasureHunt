@@ -65,7 +65,7 @@ const STOPS = [
     weetje: "Het Groot Vleeshuis dateert uit 1407 en was eeuwenlang het kloppende hart van de Gentse vleeshandel. Maar niet iedereen mocht hier zomaar aan de slag: dankzij een privilege van Karel V uit 1541 was de handel strikt voorbehouden aan afstammelingen van slechts vier families — Van Loo, Minne, Van Melle en Deynoodt. Wie niet tot één van deze geslachten behoorde, had hier niets te zoeken. Dit monopolie bleef in stand tot het einde van het Ancien Régime. Wat de meeste bezoekers niet weten: onder het gebouw liep vroeger een kanaal. Kleine scheepjes voeren er onderdoor om goederen rechtstreeks aan te voeren. Van dat water is vandaag niets meer te zien, maar de structuur van het gebouw verraadt nog steeds dat Gent ooit veel meer een waterstad was dan het nu lijkt",
     clue: "Je verlaat het gebouw waar het vlees werd verkocht. Maar naast die handel stond al eeuwenlang een klein kroegje met een veelzeggende naam — een naam die verwijst naar waar de veroordeelden eindigden. Diezelfde veroordeelden werden berecht in het gebouw dat je nu zoekt. Zoek de plek waar recht werd gesproken, gevangenen werden vastgehouden én waar de veroordeelden hun laatste ale dronken...",
     quiz: {
-      vraag: "Hoe heetten de bevoorrechte families die als enige vlees mochten verkopen?",
+      vraag: "Vier families hadden hier dus eeuwenlang het alleenrecht om vlees te verkopen. Hierdoor kregen ze wel een gepaste bijnaam, welke was dit? ",
       opties: ["De Gildebroeders", "De Prinsenkinderen", "De Koningszonen", "De Ambachtsmeesters"],
       correct: 1  // "De Prinsenkinderen"
     }
