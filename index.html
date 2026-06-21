@@ -128,6 +128,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .state-here .radar-blob{background:var(--gold)}
 .state-here .radar-status{color:var(--gold)}
 
+/* SONAR RICHTINGSGLOED — rode boog die wijst naar het doel (kompasrichting) */
+.radar-sonar{
+  position:absolute;width:80px;height:80px;border-radius:50%;
+  background:conic-gradient(from -28deg,transparent,rgba(220,40,30,.85) 28deg,rgba(220,40,30,.85) 56deg,transparent 84deg);
+  z-index:0;transition:transform .25s ease-out;filter:drop-shadow(0 0 6px rgba(220,40,30,.6));
+}
+.radar-compass-hint{font-size:.66rem;color:var(--mist);text-align:center;line-height:1.4;cursor:pointer;text-decoration:underline dotted}
+
 /* RADAR CLUE (altijd zichtbaar tijdens zoeken) */
 .radar-clue-box{
   width:100%;margin-top:.4rem;background:var(--brick-l);border-left:3px solid var(--brick);
@@ -553,15 +561,18 @@ function isOpen(st){
 
 function mkRadar(st){
   const w=document.createElement('div');w.className='radar-wrap';
-  const usedArr=S.hintsUsed[st.id]||[];
-  const clueAndHints=`
-    <div class="radar-clue-box"><div class="rc-lbl">🗺️ Clue</div>${st.clue}</div>
+  // De clue/hints die je nu ziet, horen bij het BEREIKEN van deze stop — dat zijn de clue/hints
+  // die je kreeg bij de VORIGE stop. Bij de eerste stop (start) is er dus nog geen clue.
+  const clueSrc=S.idx>0?STOPS[S.idx-1]:null;
+  const usedArr=clueSrc?(S.hintsUsed[clueSrc.id]||[]):[];
+  const clueAndHints=clueSrc?`
+    <div class="radar-clue-box"><div class="rc-lbl">🗺️ Clue</div>${clueSrc.clue}</div>
     <div class="hint-row">
-      <button class="btn-hint" id="hbtn-${st.id}-0" onclick="useHint(${st.id},0)" ${usedArr.includes(0)?'disabled':''}>💡 Hint 1 (-${CONFIG.pointsHint} pt)</button>
-      <button class="btn-hint" id="hbtn-${st.id}-1" onclick="useHint(${st.id},1)" ${usedArr.includes(1)?'disabled':''}>💡 Hint 2 (-${CONFIG.pointsHint} pt)</button>
+      <button class="btn-hint" id="hbtn-${clueSrc.id}-0" onclick="useHint(${clueSrc.id},0)" ${usedArr.includes(0)?'disabled':''}>💡 Hint 1 (-${CONFIG.pointsHint} pt)</button>
+      <button class="btn-hint" id="hbtn-${clueSrc.id}-1" onclick="useHint(${clueSrc.id},1)" ${usedArr.includes(1)?'disabled':''}>💡 Hint 2 (-${CONFIG.pointsHint} pt)</button>
     </div>
-    <div id="hint-out-${st.id}">${usedArr.map(i=>`<div class="hint-text">${st.hints[i]}</div>`).join('')}</div>
-  `;
+    <div id="hint-out-${clueSrc.id}">${usedArr.map(i=>`<div class="hint-text">${clueSrc.hints[i]}</div>`).join('')}</div>
+  `:'';
   if(!S.pos){
     w.innerHTML=`<div class="radar-card state-cold">
       <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">🧭</div></div>
@@ -578,10 +589,23 @@ function mkRadar(st){
   if(d<200){state='warm';icon='🟣';statusTxt='Warm — je komt er dichterbij!';hint='Je gaat de goede kant op, ga door!'}
   if(d<60){state='hot';icon='🔥';statusTxt='Heet — je bent er vlakbij!';hint='Kijk goed om je heen…'}
   if(d<=CONFIG.unlockRadius){state='here';icon='✨';statusTxt='HIER! Stop ontgrendeld!';hint=''}
+  // Sonar-richting: rode gloed op de plek van de ring die wijst naar het doel.
+  // bearingToTarget = richting van hier naar het doel (0=noord). Als we de kompasrichting
+  // van het toestel (S.heading) kennen, draaien we de gloed naar (bearing - heading) zodat
+  // ze overeenkomt met de kant waar je heen moet kijken. Zonder kompas tonen we geen gloed.
+  let sonarHtml='';
+  if(state!=='here'){
+    const bearingToTarget=brng(S.pos.lat,S.pos.lng,st.lat,st.lng);
+    if(S.heading!=null){
+      const rel=((bearingToTarget-S.heading)%360+360)%360;
+      sonarHtml=`<div class="radar-sonar" style="transform:rotate(${rel}deg)"></div>`;
+    }
+  }
   w.innerHTML=`<div class="radar-card state-${state}">
-    <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
+    <div class="radar-blob-wrap">${sonarHtml}<div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
     <div class="radar-status">${statusTxt}</div>
     <div class="radar-hint">Volgende stop: <strong style="color:var(--paper)">${destLabel}</strong>${hint?'<br>'+hint:''}</div>
+    ${S.heading==null&&state!=='here'?'<div class="radar-compass-hint" onclick="requestCompassPermission()">📱 Tik hier om de richtingspijl te activeren</div>':''}
     ${clueAndHints}
   </div>`;
   return w;
@@ -694,6 +718,37 @@ function startGPS(){
   document.getElementById('gpill').classList.add('on');
   if(!navigator.geolocation){document.getElementById('gtxt').textContent='GPS niet beschikbaar';return}
   navigator.geolocation.watchPosition(onPos,onErr,{enableHighAccuracy:true,timeout:15000,maximumAge:3000});
+  startCompass();
+}
+function startCompass(){
+  if(typeof DeviceOrientationEvent==='undefined')return; // geen kompas-sensor beschikbaar
+  if(typeof DeviceOrientationEvent.requestPermission==='function'){
+    // iOS: vereist een tik van de gebruiker om toestemming te vragen — gebeurt via tikken op de hint-tekst
+    return;
+  }
+  // Android/overige: meestal geen permissie-aanvraag nodig
+  window.addEventListener('deviceorientationabsolute',onOrientation,true);
+  window.addEventListener('deviceorientation',onOrientation,true);
+}
+async function requestCompassPermission(){
+  if(typeof DeviceOrientationEvent==='undefined'||typeof DeviceOrientationEvent.requestPermission!=='function')return;
+  try{
+    const res=await DeviceOrientationEvent.requestPermission();
+    if(res==='granted'){
+      window.addEventListener('deviceorientation',onOrientation,true);
+      toast('🧭 Kompas geactiveerd!');
+    }else{
+      toast('Kompas-toegang geweigerd — warm/koud blijft werken');
+    }
+  }catch(e){toast('Kompas niet beschikbaar op dit toestel')}
+}
+function onOrientation(e){
+  let h=null;
+  if(typeof e.webkitCompassHeading==='number'){h=e.webkitCompassHeading} // iOS Safari
+  else if(typeof e.alpha==='number'){h=360-e.alpha} // Android/overige, alpha draait omgekeerd
+  if(h==null||isNaN(h))return;
+  S.heading=((h%360)+360)%360;
+  render();
 }
 window.addEventListener('online',()=>{
   document.getElementById('offline-bar').style.display='none';
