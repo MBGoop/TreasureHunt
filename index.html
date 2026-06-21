@@ -128,6 +128,29 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .state-here .radar-blob{background:var(--gold)}
 .state-here .radar-status{color:var(--gold)}
 
+/* RADAR CLUE (altijd zichtbaar tijdens zoeken) */
+.radar-clue-box{
+  width:100%;margin-top:.4rem;background:var(--brick-l);border-left:3px solid var(--brick);
+  border-radius:0 var(--rs) var(--rs) 0;padding:.85rem 1rem;font-size:.85rem;line-height:1.65;
+  color:#3a1008;font-style:italic;text-align:left;
+}
+.radar-clue-box .rc-lbl{font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.35rem;color:var(--brick);font-style:normal}
+
+/* HINTS */
+.hint-row{width:100%;display:flex;gap:.5rem;margin-top:.5rem}
+.btn-hint{
+  flex:1;background:var(--ink2);border:1.5px dashed #4a4640;color:var(--gold-l);
+  border-radius:var(--rs);padding:.55rem .5rem;font-size:.72rem;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:border-color .2s,opacity .2s;
+}
+.btn-hint:hover:not(:disabled){border-color:var(--gold)}
+.btn-hint:disabled{opacity:.4;cursor:default;border-style:solid}
+.hint-text{
+  width:100%;margin-top:.5rem;background:#2a2218;border-left:3px solid var(--gold);
+  border-radius:0 var(--rs) var(--rs) 0;padding:.75rem .9rem;font-size:.8rem;line-height:1.6;
+  color:var(--gold-l);text-align:left;
+}
+
 /* LOCKED */
 .locked-card{
   margin:0 1rem 1rem;background:white;border-radius:20px;
@@ -382,7 +405,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 <script src="data.js"></script>
 <script>
-const S={team:'',score:0,pos:null,heading:null,idx:0,quizDone:new Set(),tab:{},test:false,streak:0,_celebrated:new Set()};
+const S={team:'',score:0,pos:null,heading:null,idx:0,quizDone:new Set(),tab:{},test:false,streak:0,_celebrated:new Set(),hintsUsed:{}};
 
 // boot
 document.getElementById('h1').innerHTML=CONFIG.title;
@@ -423,6 +446,7 @@ function resumeSession(){
     S.team=p.team;S.score=p.score||0;S.idx=p.idx||0;S.test=p.test||false;
     S.streak=p.streak||0;
     S.quizDone=new Set(p.quizDone||[]);
+    S.hintsUsed=p.hintsUsed||{};
     document.getElementById('ht-team').textContent=S.team;
     document.getElementById('ht-score').textContent=S.score;
     if(S.test)document.getElementById('test-bar').classList.add('on');
@@ -529,11 +553,21 @@ function isOpen(st){
 
 function mkRadar(st){
   const w=document.createElement('div');w.className='radar-wrap';
+  const usedArr=S.hintsUsed[st.id]||[];
+  const clueAndHints=`
+    <div class="radar-clue-box"><div class="rc-lbl">🗺️ Clue</div>${st.clue}</div>
+    <div class="hint-row">
+      <button class="btn-hint" id="hbtn-${st.id}-0" onclick="useHint(${st.id},0)" ${usedArr.includes(0)?'disabled':''}>💡 Hint 1 (-${CONFIG.pointsHint} pt)</button>
+      <button class="btn-hint" id="hbtn-${st.id}-1" onclick="useHint(${st.id},1)" ${usedArr.includes(1)?'disabled':''}>💡 Hint 2 (-${CONFIG.pointsHint} pt)</button>
+    </div>
+    <div id="hint-out-${st.id}">${usedArr.map(i=>`<div class="hint-text">${st.hints[i]}</div>`).join('')}</div>
+  `;
   if(!S.pos){
     w.innerHTML=`<div class="radar-card state-cold">
       <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">🧭</div></div>
       <div class="radar-status">GPS zoeken…</div>
       <div class="radar-hint">Wacht even terwijl je locatie wordt bepaald</div>
+      ${clueAndHints}
     </div>`;
     return w;
   }
@@ -548,8 +582,30 @@ function mkRadar(st){
     <div class="radar-blob-wrap"><div class="radar-sweep"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-blob">${icon}</div></div>
     <div class="radar-status">${statusTxt}</div>
     <div class="radar-hint">Volgende stop: <strong style="color:var(--paper)">${destLabel}</strong>${hint?'<br>'+hint:''}</div>
+    ${clueAndHints}
   </div>`;
   return w;
+}
+
+function useHint(stopId,hintIdx){
+  const st=STOPS.find(s=>s.id===stopId);
+  if(!st||!st.hints||!st.hints[hintIdx])return;
+  if(!S.hintsUsed[stopId])S.hintsUsed[stopId]=[];
+  if(S.hintsUsed[stopId].includes(hintIdx))return;
+  S.hintsUsed[stopId].push(hintIdx);
+  S.score=Math.max(0,S.score-CONFIG.pointsHint);
+  document.getElementById('ht-score').textContent=S.score;
+  const btn=document.getElementById(`hbtn-${stopId}-${hintIdx}`);
+  if(btn)btn.disabled=true;
+  const out=document.getElementById(`hint-out-${stopId}`);
+  if(out){
+    const div=document.createElement('div');
+    div.className='hint-text';
+    div.textContent=st.hints[hintIdx];
+    out.appendChild(div);
+  }
+  toast(`💡 Hint gebruikt — -${CONFIG.pointsHint} punt`);
+  saveSession();push(true);
 }
 
 function mkLocked(st){
@@ -627,11 +683,11 @@ function ans(id,ch){
   setTimeout(()=>{
     const clueEl=document.getElementById('clue-'+id);
     if(clueEl){clueEl.style.display='block';clueEl.scrollIntoView({behavior:'smooth',block:'nearest'})}
-  },800);
+  },ok?800:2000);
 }
 
 function addScore(n){S.score+=n;document.getElementById('ht-score').textContent=S.score;saveSession()}
-function saveSession(){try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,streak:S.streak,quizDone:[...S.quizDone]}))}catch(e){}}
+function saveSession(){try{localStorage.setItem('sj_session',JSON.stringify({team:S.team,score:S.score,idx:S.idx,test:S.test,streak:S.streak,quizDone:[...S.quizDone],hintsUsed:S.hintsUsed}))}catch(e){}}
 function clearSession(){try{localStorage.removeItem('sj_session')}catch(e){}}
 
 function startGPS(){
