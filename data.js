@@ -34,8 +34,9 @@ const CONFIG = {
 
 // ═══════════════════════════════════════════════════════════════
 //  STOPS
-//  LET OP: correct is 0-gebaseerd → eerste optie = 0, tweede = 1, derde = 2, vierde = 3 - anders blokkeerd de app. 
-//  hints: array van 2 hints per stop, gebruik kost CONFIG.pointsHint punten elk.
+//  LET OP: correct is 0-gebaseerd → eerste optie = 0, tweede = 1, derde = 2, vierde = 3 - anders blokkeert de app. 
+//  hints: array van 2 hints per stop, gebruik kost CONFIG.pointsHint punten elk. 
+//  Voor de coordinaten - gps-coordinates.net/ - meest zuiverste !! 
 // ═══════════════════════════════════════════════════════════════
 
 const STOPS = [
@@ -86,7 +87,7 @@ const STOPS = [
   },
   {
     id: 4, emoji: "🏰", name: "Gravensteen",
-    lat: 51.05718, lng: 3.72072,
+    lat: 51.05692830445632, lng: 3.7214560048077105,
     weetje: "Het Gravensteen was burcht, gevangenis, folterplaats, rechtbank, muntdrukkerij én ... Op het Sint-Veerleplein knipperen de lantaarnpalen telkens wanneer er een kind geboren wordt in Gent — een kunstwerk van de Italiaanse kunstenaar Alberto Garutti.",
     clue: "In 1337 vloeide bloed tussen twee families in de Sint-Janskerk. Als boetedoening voor die moordpartij moesten ze een godshuis bouwen. Zoek dat gebouw...",
     hints: [
@@ -101,7 +102,7 @@ const STOPS = [
   },
   {
     id: 5, emoji: "🦅", name: "Het huis van Alijn",
-    lat: 51.05695, lng: 3.72263,
+    lat: 51.05747418704883, lng: 3.723570361029096,
     weetje: "De oorsprong van het Huis van Alijn is een liefdesverhaal met een bloedige afloop. De jonge volder Hendrik Alijn was verliefd op Godelieve, de dochter van een rijke wever. Haar vader weigerde het huwelijk — hij verkoos de rijke patriciër Simon Rijm als huwelijkspartner. Godelieve weigerde op de avances van Simon in te gaan. Gekwetst door haar afwijzing en opgehitst door de volders zon Simon op wraak. Vergezeld van zijn broer en enkele bendeleden drong hij de Sint-Janskerk binnen — vandaag de Sint-Baafskathedraal — en vermoordde er tijdens een kerkdienst zijn rivaal Hendrik Alijn, zijn broer Seger én een dienaar. Als straf en boetedoening moest de familie Rijm een godshuis stichten voor de armen. Dat werd het Huis van Alijn in 1363. Boven de ingangspoort lees je nog altijd: 'Kindren Halyns Hospital anno 1363'. Het is het enige volledig bewaarde godshuis van Gent — een complex met witgekalkte huisjes rond een binnentuin en een eigen kapel. Het bood gratis onderdak, verzorging en ondersteuning aan behoeftige ouderen, zieken en weduwen. Eeuwen later verloor het gebouw zijn functie als armenhuis. In 1932 kocht de stad Gent het vervallen godshuis op en restaureerde het. In 1962 opende het als Museum voor Volkskunde — met een focus op oude ambachten en folklore. Vanaf 2000 draagt het de historische naam Huis van Alijn terug en verschoof de focus naar het dagelijkse leven in de 20e en 21e eeuw — van keukengerief tot kinderspeelgoed, van mode tot muziek.",
     clue: "Vervolg je weg naar de volgende wijk waar straatnamen de oude ambachten verraden. Zoek de straat dat de maken heeft met een spaanse stad",
     hints: [
@@ -116,7 +117,7 @@ const STOPS = [
   },
   {
     id: 6, emoji: "👟", name: "Patershol",
-    lat: 51.05770, lng: 3.72289,
+    lat: 551.057955856743156, lng: 3.723494896418935,
     weetje: "'Corduwaniers' waren schoenmakers die werkten met leder uit een spaanse stad in de wijk. De naam 'Patershol' heeft een verrassende oorsprong. Toen de karmelieten hun klooster wilden uitbreiden, bouwden ze gewoon over de Plotersgracht heen — de enige waterbron van de buurt. Als compromis lieten ze een klein, laag poortje open in de muur. Via een steile trap daalde je af naar een overkluisde, donkere ruimte om toch nog bij het water te geraken. De Gentenaars noemden die duistere doorgang spottend 'het hol van de paters' — en zo kreeg de hele wijk haar naam.",
     clue: "Je staat nu in de wijk van de ambachtslieden. De smalle straatjes lopen allemaal uit op één plein — het marktplein van de gilden. Zoek de uitgang via de straat die verwijst naar geld. Op dat plein wacht een symbolische ijzeren vrouw met een grote mond — maar in de praktijk heeft ze nooit echt iets gezegd. Ze staat er al eeuwen te kijken. Zoek haar.",
     hints: [
@@ -162,12 +163,12 @@ const STOPS = [
   },
   {
     id: 9, emoji: "🪁", name: "Walter De Buckplein",
-    lat: 51.0561170, lng: 3.7274083,
+    lat: 51.05616038859887, lng: 3.7276860556637947,
     weetje: "Dit kleine pleintje bij de Sint-Jacobskerk was ooit het stilste en meest vergeten hoekje van Gent. De kerk draagt de naam van de beschermheilige van de pelgrims — reizigers die hier eeuwenlang halt hielden op weg naar Santiago de Compostela. In 1969 veranderde het pleintje voor altijd. Walter De Buck — beeldhouwer, volkszanger en anarchist — zette er een klein podium tegen de kerkgevel, hing wat gekleurde lichtjes op en organiseerde de eerste 'Gentse Fieste gelijk in den tijd'. Met een tweedehands muziekinstallatie en pannenkoeken als catering werd het stilste pleintje van Gent het kloppende hart van de vernieuwde Gentse Feesten. Zijn volkslied 't Vliegerke kennen alle Gentenaars van buiten. In 2017 kreeg het plein zijn naam.",
     clue: "Je verlaat het plein van de man die de oude Gentse liedjes nieuw leven gaf. Maar hij is niet de enige die in Gent iets oerouds deed herleven. Vlakbij is een vrouw die een middeleeuws geheim recept herontdekte — een recept dat eeuwenlang verloren was. Waar vertoeft ze zich nu...",
     hints: [
-      "💡 Hint 1: Dit pleintje ligt bij de Sint-Jacobskerk, de kerk van de pelgrims naar Santiago de Compostela.",
-      "💡 Hint 2: Sinds 1969 is dit het kloppende hart van de Gentse Feesten — denk aan Walter De Buck en zijn 't Vliegerke."
+      "💡 Hint 1: Dit pleintje ligt bij het trefpunt",
+      "💡 Hint 2: Sinds 1969 is dit het kloppende hart van de Gentse Feesten"
     ],
     quiz: {
       vraag: "Iedereen kent wel t'vliegerke, het volkslied van Walter De Buck. Maar hij vormde samen met twee andere artiesten 'de drie W's' van de Vlaamse folk en kleinkunst in dialect. Wie waren zijn kompanen?",
@@ -177,7 +178,7 @@ const STOPS = [
   },
   {
     id: 10, emoji: "🍺", name: "De Gruut Stadsbrouwerij",
-    lat: 51.0575406, lng: 3.7302251,
+    lat: 51.057497929052346, lng: 3.730273105970854,
     weetje: "De Gentse Stadsbrouwerij Gruut is een verhaal van een geheim dat eeuwenlang verloren was. In de middeleeuwen verdeelde de Leie de stad in twee: op de rechteroever brouwden biermakers onder Duits gezag met hop, op de linkeroever brouwden ze onder Frans bewind met een mysterieus kruidenmengsel — de 'gruut'. Alleen de landsheer kende het recept, en hij hief er belasting op. In de 16e eeuw verdween de gruut-traditie voorgoed toen hop het overnam. In 2009 besloot brouwingenieur Annick De Splenter het geheim te herontdekken. Samen met de UGent analyseerde ze middeleeuwse kruiden tot ze een recept vond dat werkte. Het resultaat: een bier zachter en ronder dan hopbier, waarbij de volle smaak pas echt tot zijn recht komt. En de naam? 'Gruut' verwijst niet alleen naar de kruiden — het is ook de Gentse naam voor de 'groot', een muntstuk dat onder Keizer Karel als betaalmiddel diende.",
     clue: "Je verlaat nu degene die een oud geheim herontdekte. Volg de zoete geur van het verleden — waar ooit suiker werd geraffineerd, zoek de straat die glanst...",
     hints: [
@@ -192,7 +193,7 @@ const STOPS = [
   },
   {
     id: 11, emoji: "🏫", name: "Artevelde Goudstraat",
-    lat: 51.0569500, lng: 3.7290000,
+    lat: 51.06009593067823, lng: 3.7271720538595154,
     weetje: "De Goudstraat glinstert meer dan je denkt. In 1804 stond hier de suikerraffinaderij De Braecke — en suiker was toen inderdaad zo kostbaar als goud. Maar dat is niet het enige geheim. In datzelfde gebouw richtte een balboogschutterij haar feestzaal in: de zaal Nemrod. En alsof dat niet genoeg is: in dit huis woonde ooit Filips van Artevelde — de zoon van de volksheld die je eerder op de Vrijdagmarkt zag staan. Het bloed kruipt waar het niet gaan kan. Vandaag lopen er studenten rond waar ooit zijn voeten de vloer raakten — de suiker is verdwenen, maar de rijkdom van kennis bleef.",
     clue: "Je verlaat de straat die glanst als goud en de brug van de meermin. De rijkdom van dit verhaal loopt verder langs het water. Volg de Leie en zoek de kaai die vernoemd is naar het gilde dat je eerder al tegenkwam — op het plein van de volksheld, bovenop het oudste gebouw. Aan die kaai wacht je eindbestemming.",
     hints: [
@@ -207,7 +208,7 @@ const STOPS = [
   },
   {
     id: 12, emoji: "🏁", name: "Multatuli",
-    lat: 51.06106, lng: 3.72782,
+    lat: 51.06092095078808, lng: 3.727709283719034,
     finish: true,
     weetje: "Proficiat — jullie hebben het gehaald! En de naam van deze plek is toepasselijker dan je denkt. 'Multatuli' betekent in het Latijn: ik heb veel gedragen. Het was het pseudoniem van Eduard Douwes Dekker (1820-1887), een Nederlandse schrijver die de wereld schudde met zijn aanklacht tegen het kolonialisme in Nederlands-Indië. Hij koos die naam bewust — als symbool voor alles wat hij had meegemaakt en gedragen. Na een namiddag vol raadsels, valstrikken en historische weetjes door Gent en het hele jaar jullie fantastische inspanningen voor onze opleidingen... klinkt dat wel een beetje bekend, niet? Smakelijk eten — jullie hebben het allemaal verdiend!",
     clue: "🏁 FINISH! Jullie hebben de ontdekkingswandeling voltooid. Ga naar binnen en meld jullie aankomst!",
