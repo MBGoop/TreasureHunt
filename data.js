@@ -41,8 +41,8 @@ const CONFIG = {
 
 const STOPS = [
   {
-    id: 1, emoji: "⚓", name: "Graslei",
-    lat: 51.05477, lng: 3.72075,
+    id: 1, emoji: "⚓", name: "Korenlei & Graslei",
+    lat: 51.05502748674722, lng: 3.7201792885683416,
     weetje: "De Graslei en de Korenlei vormen samen een van de bekendste stadsgezichten van Gent. In de middeleeuwen lag hier de belangrijkste binnenhaven: schepen losten hun lading aan de kades. De Graslei was de drukke handelszone, met goederen als graan, wol en wijn. De gevelrij van gilde- en handelshuizen toont in één straat verschillende bouwstijlen en werd later zorgvuldig gerestaureerd. De Korenlei was eerder residentieel en verwijst naar de graanhandel. Hier staat ‘De Zwane’, herkenbaar aan de twee zwanen op de gevel: een oud uithangteken dat duidelijk maakte welke herberg of zaak het was. Of niet…",
     clue: "In 1754 stond hier een houten draaibrug — schippers konden hem opzij draaien zodat masten konden passeren. De brug was een scharnierpunt tussen de Graslei (graan- en grasvrachten) en de Korenlei, richting het handelskwartier. Maar welke is het? Ga ernaartoe… ",
     hints: [
@@ -51,7 +51,7 @@ const STOPS = [
     ],
     quiz: {
       vraag: "Waarom staan de zwanen op 'De Zwane' nu met de RUG naar elkaar?",
-      opties: ["Twee rivaliserende schippersfamilies", "De ene symboliseert vrouwen, de ander alcohol", "De architect vond het mooier in perfecte symmetrie.", "De stenhouwer maakte een fout"],
+      opties: ["Twee rivaliserende schippersfamilies", "De ene symboliseert vrouwen, de ander alcohol", "De architect vond het mooier in perfecte symmetrie.", "De steenhouwer maakte een fout"],
       correct: 1  // "De ene symboliseert vrouwen, de ander alcohol"
     }
   },
@@ -61,8 +61,8 @@ const STOPS = [
     weetje: "De vroegste vermelding van een brug op deze plek dateert al van 1322 — up Sente Mechiels bricge. In 1754 werd een houten draaibrug gebouwd, die een stenen brug uit 1401 verving. Die draaibrug was onmisbaar voor de binnenvaart: schippers konden hem opzijdraaien zodat masten konden passeren. Maar het voortdurende oponthoud aan de draaibrug, zeker voor de tram, deed het stadsbestuur besluiten een vaste stenen brug te plaatsen — met het oog op de wereldtentoonstelling van 1913. De huidige Sint-Michielsbrug was afgewerkt in 1909, ontworpen door architect Louis Cloquet — dezelfde man die ook het Oude Postkantoor op de Korenmarkt en het Sint-Pietersstation ontwierp. Op de centrale lantaarn staat een bronzen beeld van Sint-Michael de Aartsengel. Sinds 1983 is de brug een beschermd monument.",
     clue: "Volg het water terug stroomopwaarts, tot je de geluiden van de markt hoort. Zoek het gebouw waar vroeger werd verhandeld door Van Loo, Minne, Van Melle en Deynoodt.",
     hints: [
-      "💡 Hint 1: De huidige brug is afgewerkt in 1909, ontworpen door architect Louis Cloquet, met op de lantaarn een bronzen beeld van Sint-Michael.",
-      "💡 Hint 2: Volg het water stroomopwaarts vanaf de brug, richting de drukte van de markt."
+      "💡 Hint 1: Over deze brug, reed vroeger een tram",
+      "💡 Hint 2: Een vaste stenen brug, gemaakt in aanloop naar de Wereldtentoonstelling van 1913."
     ],
     quiz: {
       vraag: "Welk dier ligt er aan de voeten bij Sint-Michael en staat staat natuurlijk op het Belfort van Gent?",
